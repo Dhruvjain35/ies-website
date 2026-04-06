@@ -18,6 +18,7 @@ export default function CompetitionsPage() {
             <h1 className="mt-3 font-serif text-4xl sm:text-5xl font-bold text-arch-white leading-tight max-w-3xl">
               Three events. Every cycle. Open to all chapters.
             </h1>
+            <p className="mt-4 text-sm text-text-muted">Competition dates: <span className="text-arch-white font-medium">TBD</span></p>
             <div className="mt-10 flex flex-wrap gap-3">
               {[
                 { label: "GEC", sub: "Individual", href: "#gec" },

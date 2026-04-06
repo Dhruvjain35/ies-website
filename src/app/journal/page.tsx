@@ -56,7 +56,7 @@ export default function JournalPage() {
                   analysis.
                 </p>
               </div>
-              <div className="lg:border-l lg:border-border lg:pl-12 flex items-center">
+              <div className="lg:border-l lg:border-border lg:pl-12 lg:pt-12">
                 <p className="text-base text-text-secondary leading-relaxed">
                   Published periodically, each edition compiles five research papers
                   that address pressing economic questions spanning topics such as
