@@ -1,65 +1,345 @@
+import Navigation from "@/components/Navigation";
+import Hero from "@/components/Hero";
+import AnimatedStats from "@/components/AnimatedStats";
+import Footer from "@/components/Footer";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
+    <>
+      <Navigation />
+      <main>
+        <Hero />
+        <AnimatedStats />
+
+        {/* About / Mission — asymmetric layout with image */}
+        <section className="py-20 sm:py-28">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+              <div>
+                <span className="text-xs font-bold text-gold tracking-widest uppercase">About IES</span>
+                <h2 className="mt-3 font-serif text-3xl sm:text-4xl font-bold text-arch-white mb-6">
+                  We&apos;re not just an economics club.
+                </h2>
+                <p className="text-text-secondary leading-relaxed mb-4">
+                  IES connects high school students across 12 countries through
+                  weekly chapter meetings, international competitions, and a
+                  peer-reviewed research journal. No tuition, no prerequisites,
+                  no gatekeeping — just students learning economics together.
+                </p>
+                <p className="text-text-secondary leading-relaxed mb-8">
+                  Our chapters run 30–40 minute sessions covering everything from
+                  fiscal policy to behavioral economics. Top researchers get published
+                  in the <Link href="/journal" className="text-gold hover:underline font-semibold">IES Journal</Link>,
+                  and every member can compete in three international events each cycle.
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <Link
+                    href="/programs"
+                    className="px-6 py-3 text-sm font-bold text-obsidian bg-gold hover:bg-gold-dark transition-colors"
+                  >
+                    Our Programs
+                  </Link>
+                  <Link
+                    href="/journal"
+                    className="px-6 py-3 text-sm font-bold text-text-secondary border border-border hover:text-arch-white hover:border-text-muted transition-colors"
+                  >
+                    Read the Journal
+                  </Link>
+                </div>
+              </div>
+              <div className="relative">
+                <div className="overflow-hidden">
+                  <Image
+                    src="/IES_IMAGE1.jpg"
+                    alt="IES chapter meeting in session"
+                    width={700}
+                    height={467}
+                    className="w-full h-auto object-cover"
+                    quality={85}
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Competitions — horizontal featured card + 2-col grid */}
+        <section className="bg-obsidian-light py-20 sm:py-28">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-12">
+              <div>
+                <span className="text-xs font-bold text-gold tracking-widest uppercase">Compete</span>
+                <h2 className="mt-3 font-serif text-3xl sm:text-4xl font-bold text-arch-white">
+                  Three Events. Every Cycle.
+                </h2>
+              </div>
+              <Link href="/competitions" className="text-sm font-bold text-gold hover:underline shrink-0">
+                View all competitions &rarr;
+              </Link>
+            </div>
+
+            {/* Featured competition */}
+            <Link
+              href="/competitions"
+              className="group block border border-border p-8 sm:p-10 mb-6 hover:border-gold/40 transition-colors bg-obsidian"
             >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
+              <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+                <div className="flex-1">
+                  <div className="flex items-center gap-3 mb-3">
+                    <span className="text-xs font-bold text-gold">Individual</span>
+                    <span className="text-xs text-text-muted">·</span>
+                    <span className="text-xs text-text-muted">50 Questions</span>
+                    <span className="text-xs text-text-muted">·</span>
+                    <span className="text-xs text-text-muted">Online</span>
+                  </div>
+                  <h3 className="font-serif text-2xl font-bold text-arch-white group-hover:text-gold transition-colors">
+                    Global Economics Challenge (GEC)
+                  </h3>
+                  <p className="mt-3 text-sm text-text-secondary leading-relaxed max-w-2xl">
+                    Scenario-based assessment testing economic reasoning across international
+                    markets, public policy, and global trade. Trophies, medals, and certificates for top performers.
+                  </p>
+                </div>
+                <span className="text-sm font-bold text-gold group-hover:translate-x-1 transition-transform">Learn more &rarr;</span>
+              </div>
+            </Link>
+
+            {/* Two smaller competition cards */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <Link
+                href="/competitions"
+                className="group border border-border p-8 hover:border-gold/40 transition-colors bg-obsidian"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-xs font-bold text-gold">Team</span>
+                  <span className="text-xs text-text-muted">·</span>
+                  <span className="text-xs text-text-muted">2–4 Members</span>
+                  <span className="text-xs text-text-muted">·</span>
+                  <span className="text-xs text-text-muted">Live Presentation</span>
+                </div>
+                <h3 className="font-serif text-xl font-bold text-arch-white group-hover:text-gold transition-colors">
+                  Economic Policy Recommendation (EPR)
+                </h3>
+                <p className="mt-3 text-sm text-text-secondary leading-relaxed">
+                  Develop and deliver a policy proposal to a virtual judging panel.
+                  Online format accessible to chapters worldwide.
+                </p>
+              </Link>
+              <Link
+                href="/competitions"
+                className="group border border-border p-8 hover:border-gold/40 transition-colors bg-obsidian"
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <span className="text-xs font-bold text-gold">Research</span>
+                  <span className="text-xs text-text-muted">·</span>
+                  <span className="text-xs text-text-muted">Individual or Pair</span>
+                  <span className="text-xs text-text-muted">·</span>
+                  <span className="text-xs text-text-muted">Written Paper</span>
+                </div>
+                <h3 className="font-serif text-xl font-bold text-arch-white group-hover:text-gold transition-colors">
+                  Global Research Paper (GRP)
+                </h3>
+                <p className="mt-3 text-sm text-text-secondary leading-relaxed">
+                  Write a research paper on any economic topic connected to the cycle&apos;s
+                  featured country. Top 5 published in the IES Journal.
+                </p>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* What chapters actually do — different layout: left list, not cards */}
+        <section className="py-20 sm:py-28">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16">
+              <div className="lg:col-span-2">
+                <span className="text-xs font-bold text-gold tracking-widest uppercase">Programs</span>
+                <h2 className="mt-3 font-serif text-3xl sm:text-4xl font-bold text-arch-white mb-6">
+                  What Chapters Actually Do
+                </h2>
+                <p className="text-text-secondary leading-relaxed mb-6">
+                  30–40 minute sessions, every week or two. Student-led,
+                  discussion-driven, no lectures. Here&apos;s a typical chapter semester:
+                </p>
+                <Link
+                  href="/programs"
+                  className="inline-block px-6 py-3 text-sm font-bold text-obsidian bg-gold hover:bg-gold-dark transition-colors"
+                >
+                  View All Programs
+                </Link>
+              </div>
+              <div className="lg:col-span-3 space-y-0 divide-y divide-border">
+                {[
+                  {
+                    title: "Moderated Discussion Forums",
+                    text: "A chapter officer introduces a topic — inflation, trade wars, central bank policy — and facilitates a structured group debate. Members build positions through evidence-based reasoning.",
+                  },
+                  {
+                    title: "Case-Based Economic Challenges",
+                    text: "Small teams analyze a real economic scenario (market disruption, fiscal crisis, policy decision) and present a response to the chapter. Think consulting, but for econ.",
+                  },
+                  {
+                    title: "Country & Region Spotlights",
+                    text: "Deep dives into a single country's economy: GDP composition, trade relationships, labor markets, monetary policy. Members research and present findings.",
+                  },
+                  {
+                    title: "Economics Education Sessions",
+                    text: "Foundational lessons on supply & demand, comparative advantage, behavioral economics — adapted to your chapter's level. No prior coursework required.",
+                  },
+                ].map((item, i) => (
+                  <div key={item.title} className="py-6 first:pt-0">
+                    <div className="flex items-start gap-4">
+                      <span className="text-sm font-bold text-gold mt-0.5">{String(i + 1).padStart(2, '0')}</span>
+                      <div>
+                        <h3 className="font-bold text-arch-white mb-1.5">{item.title}</h3>
+                        <p className="text-sm text-text-secondary leading-relaxed">{item.text}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Where our chapters are — social proof with real names */}
+        <section className="bg-obsidian-light py-16 sm:py-20">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="text-center mb-10">
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-arch-white">
+                Chapters Worldwide
+              </h2>
+              <p className="mt-3 text-sm text-text-secondary">
+                From Birmingham to Dhaka, our chapters operate in schools across 5 continents.
+              </p>
+            </div>
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-3">
+              {[
+                "Birmingham, UK", "Glasgow, UK", "Delhi, India", "Abu Dhabi, UAE",
+                "Dubai, UAE", "Dhaka, Bangladesh", "Bacau, Romania", "Miami, US",
+                "Denver, US", "Lyon, France", "Ottawa, Canada", "Accra, Ghana",
+                "Casablanca, Morocco", "Addis Ababa, Ethiopia", "Karachi, Pakistan", "Aktau, Kazakhstan",
+              ].map((ch) => (
+                <span key={ch} className="text-sm text-text-muted px-3 py-1.5 border border-border/50 rounded-full">
+                  {ch}
+                </span>
+              ))}
+            </div>
+            <div className="text-center mt-8">
+              <Link href="/impact" className="text-sm font-bold text-gold hover:underline">
+                View the full chapter map &rarr;
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* How to start — numbered steps, not generic cards */}
+        <section className="py-20 sm:py-28">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="max-w-2xl mb-12">
+              <span className="text-xs font-bold text-gold tracking-widest uppercase">Get Started</span>
+              <h2 className="mt-3 font-serif text-3xl sm:text-4xl font-bold text-arch-white mb-4">
+                Start a Chapter in 4 Steps
+              </h2>
+              <p className="text-text-secondary">
+                It&apos;s free. No funding required, no guest speakers needed, no prerequisites.
+                Just a group of students interested in economics.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                {
+                  step: "1",
+                  title: "Apply Online",
+                  text: "Fill out the chapter application with your school name and a brief statement of interest. Takes about 5 minutes.",
+                },
+                {
+                  step: "2",
+                  title: "Get Approved",
+                  text: "Our executive board reviews applications and responds within two weeks with next steps.",
+                },
+                {
+                  step: "3",
+                  title: "Set Up",
+                  text: "Recruit members, find a faculty advisor, and schedule your first meeting. We provide all materials.",
+                },
+                {
+                  step: "4",
+                  title: "Start Running Sessions",
+                  text: "Use our discussion guides, case studies, and country spotlights to run weekly meetings at your school.",
+                },
+              ].map((item) => (
+                <div key={item.step}>
+                  <span className="inline-flex items-center justify-center w-10 h-10 rounded-full border-2 border-gold text-gold font-bold text-sm mb-4">
+                    {item.step}
+                  </span>
+                  <h3 className="font-bold text-arch-white mb-2">{item.title}</h3>
+                  <p className="text-sm text-text-secondary leading-relaxed">{item.text}</p>
+                </div>
+              ))}
+            </div>
+            <div className="mt-12 flex flex-wrap items-center gap-4">
+              <Link
+                href="/apply"
+                className="px-8 py-3.5 text-sm font-bold text-obsidian bg-gold hover:bg-gold-dark transition-colors"
+              >
+                Apply Now — It&apos;s Free
+              </Link>
+              <span className="text-sm text-text-muted">Applications reviewed within 2 weeks</span>
+            </div>
+          </div>
+        </section>
+
+        {/* CTA — more direct, less generic */}
+        <section className="bg-obsidian-light py-20 sm:py-28">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <Link
+                href="/apply"
+                className="group border border-border p-8 hover:border-gold/40 transition-colors bg-obsidian"
+              >
+                <h3 className="font-serif text-xl font-bold text-arch-white group-hover:text-gold transition-colors mb-2">
+                  Start a Chapter
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed mb-4">
+                  Free to launch. We provide branding, curriculum, and ongoing support
+                  for your school&apos;s economics club.
+                </p>
+                <span className="text-sm font-bold text-gold">Apply now &rarr;</span>
+              </Link>
+              <Link
+                href="/apply"
+                className="group border border-border p-8 hover:border-gold/40 transition-colors bg-obsidian"
+              >
+                <h3 className="font-serif text-xl font-bold text-arch-white group-hover:text-gold transition-colors mb-2">
+                  Join the Growth Internship
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed mb-4">
+                  Help expand IES internationally. Work on chapter development,
+                  outreach, and communications across our global network.
+                </p>
+                <span className="text-sm font-bold text-gold">Learn more &rarr;</span>
+              </Link>
+              <Link
+                href="/partnership"
+                className="group border border-border p-8 hover:border-gold/40 transition-colors bg-obsidian"
+              >
+                <h3 className="font-serif text-xl font-bold text-arch-white group-hover:text-gold transition-colors mb-2">
+                  School Partnerships
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed mb-4">
+                  Partner with IES to bring structured economics programming
+                  to your institution.
+                </p>
+                <span className="text-sm font-bold text-gold">Get in touch &rarr;</span>
+              </Link>
+            </div>
+          </div>
+        </section>
       </main>
-    </div>
+      <Footer />
+    </>
   );
 }
