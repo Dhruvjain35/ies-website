@@ -150,6 +150,22 @@ export default function ApplyPage() {
                 Growth Internship
               </button>
             </div>
+
+            {/* School Partnership Proposal PDF */}
+            <div className="mt-8 border border-border p-5 max-w-md flex items-center justify-between gap-4">
+              <div>
+                <p className="text-sm font-semibold text-arch-white">School Partnership Proposal</p>
+                <p className="text-xs text-text-muted mt-1">Share this document with your school administration</p>
+              </div>
+              <a
+                href="/IES_School_Partnership_Proposal.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="shrink-0 px-4 py-2 text-xs font-bold text-obsidian bg-gold hover:bg-gold-dark transition-colors"
+              >
+                View PDF
+              </a>
+            </div>
           </div>
         </section>
 
