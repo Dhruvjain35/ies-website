@@ -328,10 +328,13 @@ export default function ApplyPage() {
                   <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-8">
                     About the Growth Internship
                   </h2>
-                  <p className="text-sm text-text-secondary leading-relaxed mb-6">
+                  <p className="text-sm text-text-secondary leading-relaxed mb-3">
                     The IES Growth Internship is designed for motivated students
                     who want to contribute to the expansion and development of
                     the International Economic Society at the international level.
+                  </p>
+                  <p className="text-sm text-gold font-semibold mb-6">
+                    This is a highly selective program. Interns who demonstrate exceptional performance receive an official IES certificate of recognition.
                   </p>
                   <div className="space-y-6">
                     {[
@@ -349,7 +352,7 @@ export default function ApplyPage() {
                       },
                       {
                         title: "Interview Process",
-                        text: "If your application is accepted, you will be invited to an interview to determine if you are the right fit for the role.",
+                        text: "This is a highly selective process. If your application is accepted, you will be invited to an interview to determine if you are the right fit for the role.",
                       },
                     ].map((item) => (
                       <div key={item.title}>

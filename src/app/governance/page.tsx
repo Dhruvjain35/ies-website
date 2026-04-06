@@ -52,7 +52,7 @@ export default function GovernancePage() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 items-center">
                 <div>
                   <p className="text-sm font-bold text-gold mb-1">Core Leadership</p>
-                  <p className="text-lg font-semibold text-arch-white">Chapter President</p>
+                  <p className="text-lg font-semibold text-arch-white">President</p>
                 </div>
                 <p className="text-sm text-text-secondary leading-relaxed">
                   Leads overall chapter operations, strategy, and external representation. The president sets the direction and ensures chapter alignment with IES standards.
@@ -62,13 +62,10 @@ export default function GovernancePage() {
             {/* Other roles grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-border">
               {[
-                { role: "Vice President", description: "Supports the president and manages internal affairs" },
-                { role: "Secretary", description: "Handles documentation and meeting records" },
-                { role: "Treasurer", description: "Manages chapter finances and budgeting" },
-                { role: "Outreach Lead", description: "Coordinates community engagement and recruitment" },
-                { role: "Media & Communications", description: "Manages digital presence and communications" },
-                { role: "Events Coordinator", description: "Plans and executes chapter programming" },
-                { role: "Faculty Advisor", description: "Supervisory role per school policy" },
+                { role: "Secretary", description: "Handles documentation, meeting records, and internal coordination" },
+                { role: "Head of Competitions", description: "Organizes and manages chapter participation in GEC, EPR, and GRP events" },
+                { role: "Head of Research", description: "Leads research initiatives and supports members preparing for the GRP" },
+                { role: "Head of Marketing & Media", description: "Manages digital presence, communications, and recruitment outreach" },
               ].map((item) => (
                 <div key={item.role} className="bg-obsidian p-6">
                   <p className="text-sm font-semibold text-arch-white">{item.role}</p>

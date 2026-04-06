@@ -49,7 +49,7 @@ export default function Footer() {
             <h3 className="font-bold text-arch-white mb-4">Organization</h3>
             <ul className="space-y-2.5">
               <li><Link href="/about" className="text-sm text-text-muted hover:text-arch-white transition-colors">About IES</Link></li>
-              <li><Link href="/leadership" className="text-sm text-text-muted hover:text-arch-white transition-colors">Leadership</Link></li>
+              <li><Link href="/mission" className="text-sm text-text-muted hover:text-arch-white transition-colors">Mission & Values</Link></li>
               <li><Link href="/governance" className="text-sm text-text-muted hover:text-arch-white transition-colors">Governance</Link></li>
               <li><Link href="/contact" className="text-sm text-text-muted hover:text-arch-white transition-colors">Contact</Link></li>
             </ul>
