@@ -10,12 +10,12 @@ const founders = [
   {
     name: "Executive Director",
     role: "Co-Founder & Executive Director",
-    bio: "Built the organizational infrastructure and governance framework that established IES\u2019s credibility as a global institution.",
+    bio: "Built the organizational infrastructure and governance framework that established IES's credibility as a global institution.",
   },
   {
     name: "Director of Research",
     role: "Co-Founder & Research Director",
-    bio: "Leads IES\u2019s research initiatives and academic partnerships, ensuring scholarly rigor across all chapter programming and publications.",
+    bio: "Leads IES's research initiatives and academic partnerships, ensuring scholarly rigor across all chapter programming and publications.",
   },
   {
     name: "Director of Operations",

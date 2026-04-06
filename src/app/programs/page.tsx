@@ -28,7 +28,7 @@ export default function ProgramsPage() {
               </div>
               <div className="flex flex-col justify-center gap-6 lg:border-l lg:border-border lg:pl-12">
                 {[
-                  ["30\u201340 min", "per session"],
+                  ["30–40 min", "per session"],
                   ["Weekly / biweekly", "frequency"],
                   ["No prerequisites", "open to all"],
                 ].map(([big, small]) => (
@@ -56,7 +56,7 @@ export default function ProgramsPage() {
                 {
                   num: "01",
                   title: "Moderated Discussion Forums",
-                  text: "A chapter officer introduces a topic \u2014 inflation, trade wars, central bank policy \u2014 and facilitates a structured group debate. Members examine multiple perspectives and build positions through evidence-based reasoning.",
+                  text: "A chapter officer introduces a topic — inflation, trade wars, central bank policy — and facilitates a structured group debate. Members examine multiple perspectives and build positions through evidence-based reasoning.",
                 },
                 {
                   num: "02",
@@ -71,7 +71,7 @@ export default function ProgramsPage() {
                 {
                   num: "04",
                   title: "Country & Region Spotlights",
-                  text: "Deep dives into one country\u2019s economy: GDP composition, trade relationships, labor markets, monetary policy. Members research and present findings, connecting local conditions to global trends.",
+                  text: "Deep dives into one country's economy: GDP composition, trade relationships, labor markets, monetary policy. Members research and present findings, connecting local conditions to global trends.",
                 },
               ].map((item) => (
                 <div key={item.num} className="bg-obsidian p-8 lg:p-10">

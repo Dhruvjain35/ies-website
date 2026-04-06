@@ -29,8 +29,8 @@ export default function AboutPage() {
                 ["Structure", "Student-led academic org"],
                 ["Core Activity", "Discussion-based education"],
                 ["Scope", "12 countries, 5 continents"],
-                ["Age Range", "14\u201318 (high school)"],
-                ["Cost", "Free \u2014 $0 to join or start"],
+                ["Age Range", "14–18 (high school)"],
+                ["Cost", "Free — $0 to join or start"],
               ].map(([label, value]) => (
                 <div key={label} className="py-5 sm:px-6 first:sm:pl-0 last:sm:pr-0">
                   <p className="text-xs text-text-muted uppercase tracking-wide mb-1">{label}</p>

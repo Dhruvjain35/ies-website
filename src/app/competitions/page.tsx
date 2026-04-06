@@ -85,7 +85,7 @@ export default function CompetitionsPage() {
                       ["1st Place", "Gold Trophy + Certificate"],
                       ["2nd Place", "Silver Trophy + Certificate"],
                       ["3rd Place", "Bronze Trophy + Certificate"],
-                      ["4th\u201310th", "Medal + Certificate"],
+                      ["4th–10th", "Medal + Certificate"],
                     ].map(([place, award]) => (
                       <tr key={place}>
                         <td className="py-2.5 pr-4 text-text-muted whitespace-nowrap">{place}</td>
@@ -115,14 +115,14 @@ export default function CompetitionsPage() {
               <div className="lg:col-span-5">
                 <div className="flex flex-wrap items-center gap-3 mb-2">
                   <span className="text-xs font-bold text-gold">Team</span>
-                  <span className="text-xs text-text-muted">2\u20134 Members</span>
+                  <span className="text-xs text-text-muted">2–4 Members</span>
                   <span className="text-xs text-text-muted">Live Presentation</span>
                 </div>
                 <h2 className="font-serif text-2xl sm:text-3xl font-bold text-arch-white mb-4">
                   Economic Policy Recommendation (EPR)
                 </h2>
                 <p className="text-base text-text-secondary leading-relaxed mb-10">
-                  The EPR is IES&apos;s team presentation event. Teams of 2\u20134 develop and
+                  The EPR is IES&apos;s team presentation event. Teams of 2–4 develop and
                   deliver a policy proposal responding to an announced theme, presenting
                   live to a virtual judging panel.
                 </p>
@@ -131,7 +131,7 @@ export default function CompetitionsPage() {
                 <table className="w-full">
                   <tbody className="divide-y divide-border">
                     {[
-                      ["Team size", "2\u20134 members"],
+                      ["Team size", "2–4 members"],
                       ["Presentation", "8 minutes maximum"],
                       ["Q&A", "Judges may question any team member"],
                       ["Visual aid", "Slide deck or screen-shared material"],
@@ -158,7 +158,7 @@ export default function CompetitionsPage() {
                       "Use of real-world evidence",
                       "Feasibility of proposed policy",
                       "Team cohesion & delivery",
-                      "Response to judges\u2019 questions",
+                      "Response to judges' questions",
                     ].map((c) => (
                       <div key={c} className="flex items-center gap-2.5">
                         <span className="w-1 h-1 bg-gold shrink-0 rounded-full" />
@@ -175,7 +175,7 @@ export default function CompetitionsPage() {
                       ["1st Place", "Gold Trophy + Certificate"],
                       ["2nd Place", "Silver Trophy + Certificate"],
                       ["3rd Place", "Bronze Trophy + Certificate"],
-                      ["4th\u20135th", "Medal + Certificate"],
+                      ["4th–5th", "Medal + Certificate"],
                     ].map(([place, award]) => (
                       <tr key={place}>
                         <td className="py-2.5 pr-4 text-text-muted whitespace-nowrap">{place}</td>
@@ -193,7 +193,7 @@ export default function CompetitionsPage() {
             </div>
 
             <div className="mt-8 text-text-secondary">
-              <strong className="text-text-muted">Eligibility:</strong> Teams of 2\u20134 active IES chapter members from the same chapter, currently enrolled in high school. Stable internet connection required.
+              <strong className="text-text-muted">Eligibility:</strong> Teams of 2–4 active IES chapter members from the same chapter, currently enrolled in high school. Stable internet connection required.
             </div>
           </div>
         </section>
@@ -288,7 +288,7 @@ export default function CompetitionsPage() {
                       ["1st Place", "Gold Trophy + Certificate"],
                       ["2nd Place", "Silver Trophy + Certificate"],
                       ["3rd Place", "Bronze Trophy + Certificate"],
-                      ["4th\u20135th", "Medal + Certificate"],
+                      ["4th–5th", "Medal + Certificate"],
                     ].map(([place, award]) => (
                       <tr key={place}>
                         <td className="py-2.5 pr-4 text-text-muted whitespace-nowrap">{place}</td>
