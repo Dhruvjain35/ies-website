@@ -292,10 +292,45 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Join IES — full-width band, the lowest-friction way in */}
+        <section className="border-t border-border">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-20">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
+              <div className="lg:col-span-7">
+                <span className="text-xs font-bold text-gold tracking-widest uppercase">
+                  No chapter required
+                </span>
+                <h2 className="mt-3 font-serif text-3xl sm:text-4xl font-bold text-arch-white leading-tight">
+                  Join IES from anywhere.
+                </h2>
+                <p className="mt-5 text-base text-text-secondary leading-relaxed max-w-2xl">
+                  Your school does not need a chapter for you to be part of the
+                  network. Join the Discord, register as a member, and you can enter
+                  the Essay Competition on your own.
+                </p>
+              </div>
+              <div className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-3">
+                <Link
+                  href="/join"
+                  className="flex-1 text-center px-6 py-4 text-sm font-bold text-obsidian bg-gold hover:bg-gold-dark transition-colors"
+                >
+                  Join IES &amp; the Discord
+                </Link>
+                <Link
+                  href="/register"
+                  className="flex-1 text-center px-6 py-4 text-sm text-text-secondary border border-border hover:text-arch-white hover:border-text-muted transition-colors"
+                >
+                  Register for the Essay Competition
+                </Link>
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* CTA — more direct, less generic */}
         <section className="bg-obsidian-light py-20 sm:py-28">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               <Link
                 href="/apply"
                 className="group border border-border p-8 hover:border-gold/40 transition-colors bg-obsidian"
@@ -334,6 +369,19 @@ export default function Home() {
                   to your institution.
                 </p>
                 <span className="text-sm font-bold text-gold">Get in touch &rarr;</span>
+              </Link>
+              <Link
+                href="/register"
+                className="group border border-border p-8 hover:border-gold/40 transition-colors bg-obsidian"
+              >
+                <h3 className="font-serif text-xl font-bold text-arch-white group-hover:text-gold transition-colors mb-2">
+                  Essay Competition
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed mb-4">
+                  One prompt, 1,200 words. Open to any high school student,
+                  chapter or not.
+                </p>
+                <span className="text-sm font-bold text-gold">Register &rarr;</span>
               </Link>
             </div>
           </div>

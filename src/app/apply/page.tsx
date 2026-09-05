@@ -3,8 +3,12 @@
 import { useState, useRef, FormEvent } from "react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-
-const WEB3FORMS_KEY = "9f893dcc-01bd-4e27-94ed-0c4247683a35";
+import {
+  submitToWeb3Forms,
+  inputClass,
+  labelClass,
+  type FormStatus,
+} from "@/lib/web3forms";
 
 const supportItems = [
   {
@@ -33,25 +37,6 @@ const supportItems = [
       "Feature your chapter on the IES global platform, participate in inter-chapter events, and gain recognition within our international network.",
   },
 ];
-
-type FormStatus = "idle" | "submitting" | "success" | "error";
-
-async function submitToWeb3Forms(formData: Record<string, string>): Promise<boolean> {
-  try {
-    const response = await fetch("https://api.web3forms.com/submit", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        access_key: WEB3FORMS_KEY,
-        ...formData,
-      }),
-    });
-    const result = await response.json();
-    return result.success === true;
-  } catch {
-    return false;
-  }
-}
 
 export default function ApplyPage() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -108,11 +93,6 @@ export default function ApplyPage() {
       setInternStatus("error");
     }
   }
-
-  const inputClass =
-    "w-full bg-transparent border border-border px-4 py-3 text-sm text-arch-white placeholder:text-text-muted focus:border-gold focus:ring-0 focus:outline-none transition-colors duration-200";
-  const labelClass =
-    "block text-xs font-medium tracking-wider uppercase text-text-secondary mb-2";
 
   return (
     <>

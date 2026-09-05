@@ -16,7 +16,7 @@ export default function CompetitionsPage() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <span className="text-xs font-bold text-gold tracking-widest uppercase">Compete</span>
             <h1 className="mt-3 font-serif text-4xl sm:text-5xl font-bold text-arch-white leading-tight max-w-3xl">
-              Three events. Every cycle. Open to all chapters.
+              Four events. Every cycle. Open to all chapters.
             </h1>
             <p className="mt-4 text-sm text-text-muted">Competition dates: <span className="text-arch-white font-medium">TBD</span></p>
             <div className="mt-10 flex flex-wrap gap-3">
@@ -24,6 +24,7 @@ export default function CompetitionsPage() {
                 { label: "GEC", sub: "Individual", href: "#gec" },
                 { label: "EPR", sub: "Team", href: "#epr" },
                 { label: "GRP", sub: "Research", href: "#grp" },
+                { label: "ESSAY", sub: "Argument", href: "#essay" },
               ].map((item) => (
                 <a key={item.label} href={item.href} className="flex items-center gap-2 px-4 py-2.5 border border-border hover:border-gold/40 transition-colors">
                   <span className="text-sm font-bold text-arch-white">{item.label}</span>
@@ -313,6 +314,115 @@ export default function CompetitionsPage() {
           </div>
         </section>
 
+        {/* Essay Competition — stacked bands, distinct from the three above */}
+        <section id="essay" className="scroll-mt-24">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-20">
+            <div className="flex flex-wrap items-center gap-3 mb-2">
+              <span className="text-xs font-bold text-gold">Individual</span>
+              <span className="text-xs text-text-muted">1,200 Words</span>
+              <span className="text-xs text-text-muted">Single Prompt</span>
+              <span className="px-2 py-0.5 text-xs font-bold text-obsidian bg-gold">New</span>
+            </div>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-arch-white mb-4">
+              IES Essay Competition (IEC)
+            </h2>
+            <p className="text-base text-text-secondary leading-relaxed max-w-3xl mb-12">
+              The IEC is IES&apos;s argument event. Every participant answers the same
+              prompt on a contested economic question, takes a position, and defends
+              it in 1,200 words. Where the GRP rewards depth of research, the IEC
+              rewards the quality of the reasoning itself.
+            </p>
+
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+              {/* Format */}
+              <div className="lg:col-span-4">
+                <h3 className="text-sm font-bold text-text-muted mb-4">Format</h3>
+                <table className="w-full">
+                  <tbody className="divide-y divide-border">
+                    {[
+                      ["Participants", "Individual entry"],
+                      ["Word count", "1,200 words max"],
+                      ["Prompt", "One prompt, same for all"],
+                      ["Sources", "Optional, cited if used"],
+                      ["Window", "Two weeks from release"],
+                      ["Submission", "Anonymized before judging"],
+                    ].map(([label, value]) => (
+                      <tr key={label}>
+                        <td className="py-2.5 pr-4 text-text-muted whitespace-nowrap text-sm">{label}</td>
+                        <td className="py-2.5 text-arch-white text-sm">{value}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+
+              {/* Judging */}
+              <div className="lg:col-span-4">
+                <h3 className="text-sm font-bold text-text-muted mb-4">Judging Criteria</h3>
+                <div className="space-y-2 text-text-secondary">
+                  {[
+                    "Clarity of the central thesis",
+                    "Rigor of the economic reasoning",
+                    "Engagement with the counterargument",
+                    "Accuracy of evidence used",
+                    "Structure and prose quality",
+                    "Independence of thought",
+                  ].map((c) => (
+                    <div key={c} className="flex items-center gap-2.5">
+                      <span className="w-1 h-1 bg-gold shrink-0 rounded-full" />
+                      <span className="text-sm">{c}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Awards */}
+              <div className="lg:col-span-4">
+                <h3 className="text-sm font-bold text-text-muted mb-4">Awards</h3>
+                <table className="w-full">
+                  <tbody className="divide-y divide-border">
+                    {[
+                      ["1st Place", "Gold Trophy + Certificate"],
+                      ["2nd Place", "Silver Trophy + Certificate"],
+                      ["3rd Place", "Bronze Trophy + Certificate"],
+                      ["4th–10th", "Medal + Certificate"],
+                    ].map(([place, award]) => (
+                      <tr key={place}>
+                        <td className="py-2.5 pr-4 text-text-muted whitespace-nowrap text-sm">{place}</td>
+                        <td className="py-2.5 text-arch-white text-sm">{award}</td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <div className="mt-4 space-y-1 text-text-secondary text-sm">
+                  <p><strong className="text-arch-white">Best Counterargument:</strong> strongest engagement with the opposing case</p>
+                  <p><strong className="text-arch-white">Chapter Champion:</strong> highest scorer from each chapter</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 text-text-secondary">
+              <strong className="text-text-muted">Eligibility:</strong> Open to any high school student. Unlike the GEC, EPR, and GRP, chapter membership is <span className="text-arch-white">not required</span> to enter — though chapter members remain eligible for the Chapter Champion award. All work must be original and free of AI-generated content.
+            </div>
+
+            {/* Registration CTA */}
+            <div className="mt-10 border border-gold/40 bg-obsidian-light p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+              <div>
+                <p className="text-sm font-bold text-arch-white">Registration is open</p>
+                <p className="mt-1 text-sm text-text-secondary">
+                  Register now and the prompt, deadline, and submission instructions are emailed to you when the cycle opens.
+                </p>
+              </div>
+              <Link
+                href="/register"
+                className="shrink-0 px-6 py-3 text-sm font-bold text-obsidian bg-gold hover:bg-gold-dark transition-colors"
+              >
+                Register for the Essay Competition
+              </Link>
+            </div>
+          </div>
+        </section>
+
         {/* CTA */}
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -324,6 +434,12 @@ export default function CompetitionsPage() {
                   className="px-6 py-3 text-sm font-bold text-obsidian bg-gold hover:bg-gold-dark transition-colors"
                 >
                   Start a Chapter
+                </Link>
+                <Link
+                  href="/register"
+                  className="px-6 py-3 text-sm text-text-secondary border border-border hover:text-arch-white hover:border-text-muted transition-colors"
+                >
+                  Essay Competition
                 </Link>
                 <Link
                   href="/journal"

@@ -28,6 +28,7 @@ export default function Footer() {
             <h3 className="font-bold text-arch-white mb-4">Compete &amp; Learn</h3>
             <ul className="space-y-2.5">
               <li><Link href="/competitions" className="text-sm text-text-muted hover:text-arch-white transition-colors">All Competitions</Link></li>
+              <li><Link href="/register" className="text-sm text-text-muted hover:text-arch-white transition-colors">Essay Competition</Link></li>
               <li><Link href="/programs" className="text-sm text-text-muted hover:text-arch-white transition-colors">Chapter Programs</Link></li>
               <li><Link href="/journal" className="text-sm text-text-muted hover:text-arch-white transition-colors">IES Journal</Link></li>
             </ul>
@@ -37,6 +38,7 @@ export default function Footer() {
           <div>
             <h3 className="font-bold text-arch-white mb-4">Get Involved</h3>
             <ul className="space-y-2.5">
+              <li><Link href="/join" className="text-sm text-text-muted hover:text-arch-white transition-colors">Join IES</Link></li>
               <li><Link href="/apply" className="text-sm text-text-muted hover:text-arch-white transition-colors">Start a Chapter</Link></li>
               <li><Link href="/apply" className="text-sm text-text-muted hover:text-arch-white transition-colors">Growth Internship</Link></li>
               <li><Link href="/impact" className="text-sm text-text-muted hover:text-arch-white transition-colors">Current Chapters</Link></li>

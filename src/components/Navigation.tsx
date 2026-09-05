@@ -10,6 +10,7 @@ const navLinks = [
   { label: "Competitions", href: "/competitions" },
   { label: "Journal", href: "/journal" },
   { label: "Chapters", href: "/impact" },
+  { label: "Join", href: "/join" },
   { label: "Contact", href: "/contact" },
 ];
 
