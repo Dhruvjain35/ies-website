@@ -4,19 +4,25 @@ import { useRef, useState, FormEvent } from "react";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import { inputClass, labelClass, type FormStatus } from "@/lib/web3forms";
+import CompetitionCountdown from "@/components/CompetitionCountdown";
+import { useCompetitionPhase } from "@/hooks/useCompetitionPhase";
 import {
-  submitToWeb3Forms,
-  inputClass,
-  labelClass,
-  type FormStatus,
-} from "@/lib/web3forms";
+  OPENS_AT,
+  DEADLINE_AT,
+  COMPETITION_ENDS_AT,
+  PHASE_COPY,
+  formatDateTime,
+  formatDate,
+} from "@/lib/competition";
 
-const requirements = [
+const requirements: [string, string][] = [
   ["Participants", "Individual entry"],
   ["Word count", "1,200 words max"],
-  ["Prompt", "Announced ahead of each cycle"],
+  ["Registration opens", formatDateTime(OPENS_AT)],
+  ["Entries close", formatDateTime(DEADLINE_AT)],
+  ["Competition ends", formatDate(COMPETITION_ENDS_AT)],
   ["Sources", "Optional, cited if used"],
-  ["Submission", "Emailed after registration closes"],
 ];
 
 /** Illustrative only — the live prompt is emailed to registrants when the cycle opens. */
@@ -63,32 +69,50 @@ const faqs = [
 
 export default function RegisterPage() {
   const [status, setStatus] = useState<FormStatus>("idle");
+  const [message, setMessage] = useState<string>("");
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
+  const state = useCompetitionPhase();
+  const phase = state?.phase ?? null;
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     const form = formRef.current;
     if (!form) return;
     setStatus("submitting");
+    setMessage("");
     const data = new FormData(form);
-    const success = await submitToWeb3Forms({
-      subject: "IES Essay Competition Registration",
-      from_name: data.get("name") as string,
-      "Participant Name": data.get("name") as string,
-      "Email": data.get("email") as string,
-      "School / Institution": data.get("institution") as string,
-      "IES Chapter": (data.get("chapter") as string) || "Not affiliated / none listed",
-      "Grade / Year": data.get("year") as string,
-      "Country": data.get("country") as string,
-      "Working Title or Angle": (data.get("angle") as string) || "Not provided",
-      "Original Work Confirmed": data.get("original") ? "Yes" : "No",
-    });
-    if (success) {
-      setStatus("success");
-      form.reset();
-    } else {
+
+    try {
+      const res = await fetch("/api/essay-signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: data.get("name"),
+          email: data.get("email"),
+          institution: data.get("institution"),
+          year: data.get("year"),
+          country: data.get("country"),
+          chapter: data.get("chapter"),
+          angle: data.get("angle"),
+          original: data.get("original") === "on",
+          company: data.get("company"), // honeypot
+        }),
+      });
+      const json = await res.json();
+      if (res.ok && json.ok) {
+        setStatus("success");
+        setMessage(json.message ?? "You are registered.");
+        if (!json.duplicate) form.reset();
+      } else {
+        setStatus("error");
+        setMessage(json.error ?? "Something went wrong. Please try again.");
+      }
+    } catch {
       setStatus("error");
+      setMessage(
+        "We could not reach the server. Please check your connection and try again.",
+      );
     }
   }
 
@@ -96,23 +120,63 @@ export default function RegisterPage() {
     <>
       <Navigation />
       <main className="pt-24">
-        {/* Header */}
-        <section className="py-20 sm:py-28">
+        {/* Header — status and countdown track the live phase */}
+        <section className="py-20 sm:py-24">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <span className="text-xs font-bold text-gold tracking-widest uppercase">
-              Register
-            </span>
-            <h1 className="mt-3 font-serif text-4xl sm:text-5xl font-bold text-arch-white leading-tight max-w-3xl">
-              IES Essay Competition
-            </h1>
-            <p className="mt-6 max-w-2xl text-lg text-text-secondary leading-relaxed">
-              One prompt. Twelve hundred words. Register below and the prompt,
-              deadline, and submission instructions are emailed to you when the
-              cycle opens.
-            </p>
-            <p className="mt-4 text-sm text-text-muted">
-              Registration deadline: <span className="text-arch-white font-medium">TBD</span>
-            </p>
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-end">
+              <div className="lg:col-span-7">
+                <div className="flex flex-wrap items-center gap-3">
+                  <span className="text-xs font-bold text-gold tracking-widest uppercase">
+                    Register
+                  </span>
+                  {phase && (
+                    <span
+                      className={`px-2.5 py-1 text-xs font-bold ${
+                        phase === "open"
+                          ? "text-obsidian bg-gold"
+                          : "text-text-secondary border border-border"
+                      }`}
+                    >
+                      {PHASE_COPY[phase].label}
+                    </span>
+                  )}
+                </div>
+                <h1 className="mt-4 font-serif text-4xl sm:text-5xl font-bold text-arch-white leading-tight">
+                  IES Essay Competition
+                </h1>
+                <p className="mt-6 max-w-2xl text-lg text-text-secondary leading-relaxed">
+                  One prompt. Twelve hundred words. Registrants receive the prompt,
+                  the deadline, and submission instructions by email when the
+                  competition window opens.
+                </p>
+                <p className="mt-5 text-sm text-text-secondary">
+                  {phase ? PHASE_COPY[phase].body : PHASE_COPY.upcoming.body}
+                </p>
+              </div>
+
+              <div className="lg:col-span-5">
+                <div className="border border-border bg-obsidian-light p-6">
+                  <p className="text-xs font-bold tracking-widest uppercase text-text-muted mb-4">
+                    {phase === "upcoming"
+                      ? "Registration opens in"
+                      : phase === "open"
+                        ? "Entries close in"
+                        : phase === "competition"
+                          ? "Competition ends in"
+                          : phase === "closed"
+                            ? "Cycle complete"
+                            : "Countdown"}
+                  </p>
+                  {phase === "closed" ? (
+                    <p className="font-serif text-xl text-arch-white">
+                      Results are sent to participants by email.
+                    </p>
+                  ) : (
+                    <CompetitionCountdown parts={state?.parts ?? null} size="sm" />
+                  )}
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -120,12 +184,58 @@ export default function RegisterPage() {
         <section className="border-t border-border py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-              {/* Form */}
+              {/* Form — only mounted while the window is actually open */}
               <div>
                 <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-8">
-                  Registration Form
+                  {phase === "open" ? "Registration Form" : "Registration"}
                 </h2>
 
+                {phase === null && (
+                  <div className="border border-border p-8 space-y-3 animate-pulse">
+                    <div className="h-3 w-32 bg-obsidian-lighter" />
+                    <div className="h-3 w-52 bg-obsidian-lighter" />
+                  </div>
+                )}
+
+                {phase !== null && phase !== "open" && (
+                  <div className="border border-border bg-obsidian-light p-8">
+                    <h3 className="font-serif text-2xl font-bold text-arch-white mb-3">
+                      {PHASE_COPY[phase].heading}
+                    </h3>
+                    <p className="text-sm text-text-secondary leading-relaxed mb-6">
+                      {PHASE_COPY[phase].body}
+                    </p>
+                    {phase === "upcoming" && (
+                      <>
+                        <div className="border-t border-border pt-6 mb-6">
+                          <CompetitionCountdown parts={state?.parts ?? null} size="sm" />
+                        </div>
+                        <p className="text-sm text-text-secondary leading-relaxed mb-6">
+                          The form below goes live automatically at{" "}
+                          <span className="text-arch-white">{formatDateTime(OPENS_AT)}</span>.
+                          Nothing to do until then — join the Discord and we will
+                          announce it there the moment it opens.
+                        </p>
+                      </>
+                    )}
+                    <div className="flex flex-wrap gap-3">
+                      <Link
+                        href="/join"
+                        className="px-5 py-2.5 text-xs font-bold text-obsidian bg-gold hover:bg-gold-dark transition-colors"
+                      >
+                        Join IES
+                      </Link>
+                      <Link
+                        href="/competitions#essay"
+                        className="px-5 py-2.5 text-xs text-text-secondary border border-border hover:text-arch-white hover:border-text-muted transition-colors"
+                      >
+                        Read the rules
+                      </Link>
+                    </div>
+                  </div>
+                )}
+
+                {phase === "open" && (
                 <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
                   <div>
                     <label htmlFor="re-name" className={labelClass}>Full Name</label>
@@ -174,6 +284,12 @@ export default function RegisterPage() {
                     </label>
                   </div>
 
+                  {/* Honeypot — hidden from people, tempting to bots */}
+                  <div aria-hidden="true" className="absolute left-[-9999px] h-0 w-0 overflow-hidden">
+                    <label htmlFor="re-company">Company</label>
+                    <input id="re-company" name="company" type="text" tabIndex={-1} autoComplete="off" />
+                  </div>
+
                   <button
                     type="submit"
                     disabled={status === "submitting"}
@@ -182,19 +298,20 @@ export default function RegisterPage() {
                     {status === "submitting" ? "Submitting..." : "Register for the Essay Competition"}
                   </button>
                 </form>
+                )}
 
-                {status === "success" && (
-                  <p className="mt-4 text-sm text-green-400">
-                    You are registered. The prompt and submission instructions will
-                    be emailed to you when the cycle opens.
+                {phase === "open" && status === "success" && (
+                  <p className="mt-4 text-sm text-green-400" role="status">
+                    {message} The prompt and submission instructions will be emailed
+                    to you when the competition window opens.
                   </p>
                 )}
-                {status === "error" && (
-                  <p className="mt-4 text-sm text-red-400">
-                    Something went wrong. Please try again or email us directly at ies.economicsociety@gmail.com.
+                {phase === "open" && status === "error" && (
+                  <p className="mt-4 text-sm text-red-400" role="alert">
+                    {message}
                   </p>
                 )}
-                {status === "idle" && (
+                {phase === "open" && status === "idle" && (
                   <p className="mt-4 text-xs text-text-muted">
                     Registration is free. You will receive a confirmation email.
                   </p>

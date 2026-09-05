@@ -1,6 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import AnimatedStats from "@/components/AnimatedStats";
+import EssayCompetitionFeature from "@/components/EssayCompetitionFeature";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,6 +12,7 @@ export default function Home() {
       <Navigation />
       <main>
         <Hero />
+        <EssayCompetitionFeature />
         <AnimatedStats />
 
         {/* About / Mission — asymmetric layout with image */}

@@ -1,6 +1,14 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Link from "next/link";
+import EssayRegistrationCta from "@/components/EssayRegistrationCta";
+import {
+  OPENS_AT,
+  DEADLINE_AT,
+  COMPETITION_ENDS_AT,
+  formatDate,
+  formatDateTime,
+} from "@/lib/competition";
 
 export const metadata = {
   title: "Competitions | International Economic Society",
@@ -18,7 +26,13 @@ export default function CompetitionsPage() {
             <h1 className="mt-3 font-serif text-4xl sm:text-5xl font-bold text-arch-white leading-tight max-w-3xl">
               Four events. Every cycle. Open to all chapters.
             </h1>
-            <p className="mt-4 text-sm text-text-muted">Competition dates: <span className="text-arch-white font-medium">TBD</span></p>
+            <p className="mt-4 text-sm text-text-muted">
+              Essay Competition:{" "}
+              <span className="text-arch-white font-medium">
+                registration {formatDate(OPENS_AT)} – {formatDate(DEADLINE_AT)}
+              </span>
+              . GEC, EPR, and GRP dates: <span className="text-arch-white font-medium">TBD</span>
+            </p>
             <div className="mt-10 flex flex-wrap gap-3">
               {[
                 { label: "GEC", sub: "Individual", href: "#gec" },
@@ -345,7 +359,9 @@ export default function CompetitionsPage() {
                       ["Word count", "1,200 words max"],
                       ["Prompt", "One prompt, same for all"],
                       ["Sources", "Optional, cited if used"],
-                      ["Window", "Two weeks from release"],
+                      ["Registration opens", formatDateTime(OPENS_AT)],
+                      ["Entries close", formatDateTime(DEADLINE_AT)],
+                      ["Competition ends", formatDate(COMPETITION_ENDS_AT)],
                       ["Entries", "One per participant"],
                       ["Judging", "Anonymized, panel-scored"],
                     ].map(([label, value]) => (
@@ -444,21 +460,8 @@ export default function CompetitionsPage() {
               <strong className="text-text-muted">Eligibility:</strong> Open to any high school student. Unlike the GEC, EPR, and GRP, chapter membership is <span className="text-arch-white">not required</span> to enter — though chapter members remain eligible for the Chapter Champion award. All work must be original and free of AI-generated content.
             </div>
 
-            {/* Registration CTA */}
-            <div className="mt-10 border border-gold/40 bg-obsidian-light p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-              <div>
-                <p className="text-sm font-bold text-arch-white">Registration is open</p>
-                <p className="mt-1 text-sm text-text-secondary">
-                  Register now and the prompt, deadline, and submission instructions are emailed to you when the cycle opens.
-                </p>
-              </div>
-              <Link
-                href="/register"
-                className="shrink-0 px-6 py-3 text-sm font-bold text-obsidian bg-gold hover:bg-gold-dark transition-colors"
-              >
-                Register for the Essay Competition
-              </Link>
-            </div>
+            {/* Registration CTA — phase-aware */}
+            <EssayRegistrationCta />
           </div>
         </section>
 
