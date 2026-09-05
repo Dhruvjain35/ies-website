@@ -314,13 +314,13 @@ export default function Home() {
                 className="group border border-border p-8 hover:border-gold/40 transition-colors bg-obsidian"
               >
                 <h3 className="font-serif text-xl font-bold text-arch-white group-hover:text-gold transition-colors mb-2">
-                  Join the Growth Internship
+                  Growth Internship
                 </h3>
                 <p className="text-sm text-text-secondary leading-relaxed mb-4">
-                  Help expand IES internationally. Work on chapter development,
-                  outreach, and communications across our global network.
+                  Coming Soon. We will not review applications just yet.
+                  Check back later for updates.
                 </p>
-                <span className="text-sm font-bold text-gold">Learn more &rarr;</span>
+                <span className="text-sm font-bold text-gold">Coming soon &rarr;</span>
               </Link>
               <Link
                 href="/partnership"

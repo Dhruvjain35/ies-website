@@ -264,104 +264,21 @@ export default function ApplyPage() {
         {activeTab === "internship" && (
           <section id="internship" className="border-t border-border py-20">
             <div className="mx-auto max-w-7xl px-6 lg:px-8">
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-16">
-                <div>
-                  <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-8">
-                    IES Growth Internship Application
-                  </h2>
-
-                  <form ref={internRef} className="space-y-6" onSubmit={handleInternSubmit}>
-                    <div>
-                      <label htmlFor="in-name" className={labelClass}>Full Name</label>
-                      <input id="in-name" name="name" type="text" required className={inputClass} placeholder="Enter your full name" />
-                    </div>
-                    <div>
-                      <label htmlFor="in-email" className={labelClass}>Email</label>
-                      <input id="in-email" name="email" type="email" required className={inputClass} placeholder="name@school.edu" />
-                    </div>
-                    <div>
-                      <label htmlFor="in-institution" className={labelClass}>School / Institution</label>
-                      <input id="in-institution" name="institution" type="text" required className={inputClass} placeholder="Your school or institution" />
-                    </div>
-                    <div>
-                      <label htmlFor="in-year" className={labelClass}>Grade / Year</label>
-                      <input id="in-year" name="year" type="text" required className={inputClass} placeholder="e.g. Grade 11, Year 12" />
-                    </div>
-                    <div>
-                      <label htmlFor="in-country" className={labelClass}>Country</label>
-                      <input id="in-country" name="country" type="text" required className={inputClass} placeholder="Your country" />
-                    </div>
-                    <div>
-                      <label htmlFor="in-motivation" className={labelClass}>Why do you want to join?</label>
-                      <textarea id="in-motivation" name="motivation" rows={4} required className={`${inputClass} resize-none`} placeholder="Describe your interest in the IES Growth Internship..." />
-                    </div>
-                    <div>
-                      <label htmlFor="in-experience" className={labelClass}>Relevant Experience</label>
-                      <textarea id="in-experience" name="experience" rows={3} required className={`${inputClass} resize-none`} placeholder="Describe any relevant leadership, economics, or organizational experience..." />
-                    </div>
-                    <button
-                      type="submit"
-                      disabled={internStatus === "submitting"}
-                      className="w-full px-8 py-4 text-sm font-semibold text-obsidian bg-gold hover:bg-gold-dark transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                    >
-                      {internStatus === "submitting" ? "Submitting..." : "Submit Internship Application"}
-                    </button>
-                  </form>
-                  {internStatus === "success" && (
-                    <p className="mt-4 text-sm text-green-400">
-                      Application submitted successfully. We will review it and get back to you within 5-7 business days.
-                    </p>
-                  )}
-                  {internStatus === "error" && (
-                    <p className="mt-4 text-sm text-red-400">
-                      Something went wrong. Please try again or email us directly at ies.economicsociety@gmail.com.
-                    </p>
-                  )}
-                  {internStatus === "idle" && (
-                    <p className="mt-4 text-xs text-text-muted">
-                      Applications are reviewed within 5-7 business days.
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-8">
-                    About the Growth Internship
-                  </h2>
-                  <p className="text-sm text-text-secondary leading-relaxed mb-3">
-                    The IES Growth Internship is designed for motivated students
-                    who want to contribute to the expansion and development of
-                    the International Economic Society at the international level.
-                  </p>
-                  <p className="text-sm text-gold font-semibold mb-6">
-                    This is a highly selective program. Interns who demonstrate exceptional performance receive an official IES certificate of recognition.
-                  </p>
-                  <div className="space-y-6">
-                    {[
-                      {
-                        title: "Chapter Development",
-                        text: "Support new chapters through onboarding, mentorship, and strategic guidance as they establish their presence.",
-                      },
-                      {
-                        title: "International Coordination",
-                        text: "Work with chapter leaders across countries to facilitate inter-chapter collaboration and shared initiatives.",
-                      },
-                      {
-                        title: "Communications & Outreach",
-                        text: "Help expand IES's reach through digital communications, partnership outreach, and brand development.",
-                      },
-                      {
-                        title: "Interview Process",
-                        text: "This is a highly selective process. If your application is accepted, you will be invited to an interview to determine if you are the right fit for the role.",
-                      },
-                    ].map((item) => (
-                      <div key={item.title}>
-                        <h3 className="text-sm font-semibold text-arch-white">{item.title}</h3>
-                        <p className="mt-1 text-sm text-text-secondary leading-relaxed">{item.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+              <div className="max-w-2xl mx-auto text-center">
+                <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-8">
+                  IES Growth Internship
+                </h2>
+                <h3 className="font-serif text-3xl sm:text-4xl font-bold text-arch-white mb-6">
+                  Coming Soon
+                </h3>
+                <p className="text-base text-text-secondary leading-relaxed mb-4">
+                  The IES Growth Internship is not yet accepting applications.
+                  We will not review applications at this time.
+                </p>
+                <p className="text-sm text-text-muted leading-relaxed">
+                  Please check back later for updates on when applications open.
+                  In the meantime, feel free to explore other ways to get involved with IES.
+                </p>
               </div>
             </div>
           </section>

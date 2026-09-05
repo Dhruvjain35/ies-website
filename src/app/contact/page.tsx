@@ -64,7 +64,7 @@ export default function ContactPage() {
                   {[
                     { label: "Start a Chapter", href: "/apply", desc: "Apply to launch an IES chapter at your school" },
                     { label: "School Partnership", href: "/partnership", desc: "Partnership proposal for administrators and faculty" },
-                    { label: "Growth Internship", href: "/apply", desc: "Apply to join the IES international team" },
+                    { label: "Growth Internship", href: "/apply", desc: "Coming Soon — applications are not being reviewed yet" },
                     { label: "Competitions", href: "/competitions", desc: "Details on GEC, EPR, and GRP events" },
                   ].map((item) => (
                     <Link
