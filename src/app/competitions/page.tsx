@@ -330,7 +330,8 @@ export default function CompetitionsPage() {
               The IEC is IES&apos;s argument event. Every participant answers the same
               prompt on a contested economic question, takes a position, and defends
               it in 1,200 words. Where the GRP rewards depth of research, the IEC
-              rewards the quality of the reasoning itself.
+              rewards the quality of the reasoning itself. Essays are anonymized
+              before they reach the judging panel.
             </p>
 
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
@@ -345,7 +346,8 @@ export default function CompetitionsPage() {
                       ["Prompt", "One prompt, same for all"],
                       ["Sources", "Optional, cited if used"],
                       ["Window", "Two weeks from release"],
-                      ["Submission", "Anonymized before judging"],
+                      ["Entries", "One per participant"],
+                      ["Judging", "Anonymized, panel-scored"],
                     ].map(([label, value]) => (
                       <tr key={label}>
                         <td className="py-2.5 pr-4 text-text-muted whitespace-nowrap text-sm">{label}</td>
@@ -356,21 +358,21 @@ export default function CompetitionsPage() {
                 </table>
               </div>
 
-              {/* Judging */}
+              {/* Submission requirements */}
               <div className="lg:col-span-4">
-                <h3 className="text-sm font-bold text-text-muted mb-4">Judging Criteria</h3>
-                <div className="space-y-2 text-text-secondary">
+                <h3 className="text-sm font-bold text-text-muted mb-4">Submission Requirements</h3>
+                <div className="space-y-3">
                   {[
-                    "Clarity of the central thesis",
-                    "Rigor of the economic reasoning",
-                    "Engagement with the counterargument",
-                    "Accuracy of evidence used",
-                    "Structure and prose quality",
-                    "Independence of thought",
-                  ].map((c) => (
-                    <div key={c} className="flex items-center gap-2.5">
-                      <span className="w-1 h-1 bg-gold shrink-0 rounded-full" />
-                      <span className="text-sm">{c}</span>
+                    "PDF or DOCX, submitted by the deadline in the prompt email",
+                    "12pt body text, double-spaced, numbered pages",
+                    "Word count excludes the title, citations, and bibliography",
+                    "No name anywhere in the document — use the entry ID we email you",
+                    "MLA, APA, or Chicago, applied consistently throughout",
+                    "Entirely original work, free of AI-generated content",
+                  ].map((item, i) => (
+                    <div key={item} className="flex items-start gap-3">
+                      <span className="text-xs font-bold text-gold mt-0.5 shrink-0">{String(i + 1).padStart(2, '0')}</span>
+                      <span className="text-sm text-text-secondary leading-relaxed">{item}</span>
                     </div>
                   ))}
                 </div>
@@ -396,9 +398,46 @@ export default function CompetitionsPage() {
                 </table>
                 <div className="mt-4 space-y-1 text-text-secondary text-sm">
                   <p><strong className="text-arch-white">Best Counterargument:</strong> strongest engagement with the opposing case</p>
+                  <p><strong className="text-arch-white">Published in the IES Journal:</strong> top 3 essays are featured</p>
                   <p><strong className="text-arch-white">Chapter Champion:</strong> highest scorer from each chapter</p>
                 </div>
               </div>
+            </div>
+
+            {/* Scoring rubric — weighted, on a contrasting panel */}
+            <div className="mt-14 bg-obsidian-light border border-border p-8 sm:p-10">
+              <div className="flex flex-wrap items-baseline justify-between gap-4 mb-8">
+                <h3 className="text-sm font-bold text-gold tracking-[0.2em] uppercase">
+                  Scoring Rubric
+                </h3>
+                <span className="text-sm text-text-muted">100 points total</span>
+              </div>
+              <div className="space-y-5">
+                {[
+                  ["Economic reasoning", 25, "Is the analysis correct, and does it use economic logic rather than assertion?"],
+                  ["Thesis and position", 20, "Is there one clear claim, stated early and held throughout?"],
+                  ["Counterargument", 20, "Is the strongest opposing case represented fairly and answered?"],
+                  ["Evidence", 15, "Is the evidence accurate, relevant, and honestly characterized?"],
+                  ["Structure and prose", 15, "Does the essay read clearly and move in a deliberate order?"],
+                  ["Originality", 5, "Does the argument show independent thought?"],
+                ].map(([criterion, weight, detail]) => (
+                  <div key={criterion as string}>
+                    <div className="flex items-baseline justify-between gap-4 mb-2">
+                      <span className="text-sm font-semibold text-arch-white">{criterion}</span>
+                      <span className="text-sm font-bold text-gold shrink-0">{weight} pts</span>
+                    </div>
+                    <div className="h-1 w-full bg-obsidian mb-2">
+                      <div className="h-full bg-gold/60" style={{ width: `${weight}%` }} />
+                    </div>
+                    <p className="text-sm text-text-secondary leading-relaxed">{detail}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-8 pt-6 border-t border-border text-sm text-text-secondary">
+                Each essay is scored independently by two judges. Scores within 10 points
+                are averaged; a wider gap goes to a third judge, whose score is final.
+                Essays over the word limit are scored on the first 1,200 words only.
+              </p>
             </div>
 
             <div className="mt-8 text-text-secondary">

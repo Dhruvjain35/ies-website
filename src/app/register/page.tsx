@@ -19,8 +19,51 @@ const requirements = [
   ["Submission", "Emailed after registration closes"],
 ];
 
+/** Illustrative only — the live prompt is emailed to registrants when the cycle opens. */
+const samplePrompts = [
+  "Central banks have targeted 2% inflation for three decades. Should that target be higher?",
+  "Does industrial policy do more good than harm in developing economies?",
+  "A country discovers a large resource windfall. Is a sovereign wealth fund the responsible use of it?",
+];
+
+const faqs = [
+  {
+    q: "Do I need to be in an IES chapter?",
+    a: "No. The Essay Competition is the one IES event open to any high school student, whether or not their school has a chapter. Chapter members are additionally eligible for the Chapter Champion award.",
+  },
+  {
+    q: "Is there an entry fee?",
+    a: "No. Registration and entry are free.",
+  },
+  {
+    q: "When do I get the prompt?",
+    a: "The prompt is emailed to every registrant the day the cycle opens. You then have two weeks to submit.",
+  },
+  {
+    q: "Can I submit more than one essay?",
+    a: "One entry per participant. If you submit twice, we score the earlier submission.",
+  },
+  {
+    q: "Do I have to cite sources?",
+    a: "Sources are optional — the IEC is an argument event, not a research event. If you do use sources, cite them consistently in MLA, APA, or Chicago. Citations do not count toward the 1,200 words.",
+  },
+  {
+    q: "How is it judged?",
+    a: "Essays are anonymized, then scored by two judges against a 100-point rubric. Scores within 10 points are averaged; a wider gap goes to a third judge, whose score is final.",
+  },
+  {
+    q: "Can I use AI to write or edit it?",
+    a: "No. Submissions must be entirely your own original work, free of AI-generated content. This is the same standard the GRP holds.",
+  },
+  {
+    q: "What happens if I go over the word limit?",
+    a: "Essays over 1,200 words are scored on the first 1,200 words only. Nothing past that is read.",
+  },
+];
+
 export default function RegisterPage() {
   const [status, setStatus] = useState<FormStatus>("idle");
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const formRef = useRef<HTMLFormElement>(null);
 
   async function handleSubmit(e: FormEvent) {
@@ -205,6 +248,86 @@ export default function RegisterPage() {
                       Full competition details
                     </Link>
                   </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Sample prompts */}
+        <section className="bg-obsidian-light border-t border-border">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-20">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+              <div className="lg:col-span-4">
+                <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
+                  Sample Prompts
+                </h2>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  The live prompt is not published in advance. These are the shape of
+                  question to expect: contested, answerable from either side, and
+                  impossible to resolve by looking something up.
+                </p>
+              </div>
+              <div className="lg:col-span-7 lg:col-start-6">
+                <div className="border-t border-border">
+                  {samplePrompts.map((prompt, i) => (
+                    <div key={prompt} className="flex items-start gap-5 border-b border-border py-6">
+                      <span className="text-xs font-bold text-gold mt-1 shrink-0">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <p className="font-serif text-lg text-arch-white leading-snug">
+                        {prompt}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FAQ */}
+        <section className="py-16 sm:py-20">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+              <div className="lg:col-span-4">
+                <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
+                  Questions
+                </h2>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  Anything not covered here, email{" "}
+                  <a
+                    href="mailto:ies.economicsociety@gmail.com"
+                    className="text-gold hover:text-gold-dark transition-colors"
+                  >
+                    ies.economicsociety@gmail.com
+                  </a>
+                  .
+                </p>
+              </div>
+              <div className="lg:col-span-7 lg:col-start-6">
+                <div className="border-t border-border">
+                  {faqs.map((faq, i) => (
+                    <div key={faq.q} className="border-b border-border">
+                      <button
+                        onClick={() => setOpenFaq(openFaq === i ? null : i)}
+                        className="flex items-center justify-between w-full py-4 text-left gap-4 group"
+                        aria-expanded={openFaq === i}
+                      >
+                        <span className="text-sm font-medium text-arch-white group-hover:text-gold transition-colors duration-200">
+                          {faq.q}
+                        </span>
+                        <span className="text-text-muted text-lg leading-none shrink-0">
+                          {openFaq === i ? "−" : "+"}
+                        </span>
+                      </button>
+                      {openFaq === i && (
+                        <p className="pb-4 text-sm text-text-secondary leading-relaxed">
+                          {faq.a}
+                        </p>
+                      )}
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
