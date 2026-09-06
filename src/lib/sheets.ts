@@ -14,24 +14,35 @@ const SCOPE = "https://www.googleapis.com/auth/spreadsheets";
 
 export const SHEET_HEADERS = [
   "Timestamp (CT)",
-  "Name",
+  "Entry Type",
+  "Team Name",
+  "Size",
+  "Primary Contact",
   "Email",
   "School / Institution",
   "Grade / Year",
   "Country",
   "IES Chapter",
-  "Working Title or Angle",
+  "Team Members",
+  "Policy Area / Angle",
   "Source",
 ] as const;
 
+/** Last column letter covered by SHEET_HEADERS. Keep in step with the array. */
+const LAST_COL = "M";
+
 export type SignupRow = {
   timestamp: string;
+  entryType: string;
+  teamName: string;
+  size: string;
   name: string;
   email: string;
   institution: string;
   year: string;
   country: string;
   chapter: string;
+  members: string;
   angle: string;
   source: string;
 };
@@ -153,7 +164,7 @@ async function getTabName(creds: Credentials): Promise<string> {
 async function ensureHeaderRow(creds: Credentials, tab: string): Promise<void> {
   const existing = (await sheetsFetch(
     creds,
-    `/values/${encodeURIComponent(`${tab}!A1:I1`)}`,
+    `/values/${encodeURIComponent(`${tab}!A1:${LAST_COL}1`)}`,
   )) as { values?: string[][] };
 
   if (existing.values?.[0]?.length) return;
@@ -199,7 +210,7 @@ export async function isDuplicateEmail(email: string): Promise<boolean> {
   const tab = await getTabName(creds);
   const res = (await sheetsFetch(
     creds,
-    `/values/${encodeURIComponent(`${tab}!C2:C`)}`,
+    `/values/${encodeURIComponent(`${tab}!F2:F`)}`,
   )) as { values?: string[][] };
   const target = email.trim().toLowerCase();
   return (res.values ?? []).some((r) => r[0]?.trim().toLowerCase() === target);
@@ -215,7 +226,7 @@ export async function appendSignup(row: SignupRow): Promise<void> {
 
   await sheetsFetch(
     creds,
-    `/values/${encodeURIComponent(`${tab}!A:I`)}:append` +
+    `/values/${encodeURIComponent(`${tab}!A:${LAST_COL}`)}:append` +
       `?valueInputOption=USER_ENTERED&insertDataOption=INSERT_ROWS`,
     {
       method: "POST",
@@ -223,12 +234,16 @@ export async function appendSignup(row: SignupRow): Promise<void> {
         values: [
           [
             row.timestamp,
+            row.entryType,
+            row.teamName,
+            row.size,
             row.name,
             row.email,
             row.institution,
             row.year,
             row.country,
             row.chapter,
+            row.members,
             row.angle,
             row.source,
           ],

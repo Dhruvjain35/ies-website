@@ -28,7 +28,7 @@ export default function Footer() {
             <h3 className="font-bold text-arch-white mb-4">Compete &amp; Learn</h3>
             <ul className="space-y-2.5">
               <li><Link href="/competitions" className="text-sm text-text-muted hover:text-arch-white transition-colors">All Competitions</Link></li>
-              <li><Link href="/register" className="text-sm text-text-muted hover:text-arch-white transition-colors">Essay Competition</Link></li>
+              <li><Link href="/register" className="text-sm text-text-muted hover:text-arch-white transition-colors">EPR &mdash; Register</Link></li>
               <li><Link href="/programs" className="text-sm text-text-muted hover:text-arch-white transition-colors">Chapter Programs</Link></li>
               <li><Link href="/journal" className="text-sm text-text-muted hover:text-arch-white transition-colors">IES Journal</Link></li>
             </ul>

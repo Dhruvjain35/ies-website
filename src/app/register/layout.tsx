@@ -1,7 +1,7 @@
 export const metadata = {
-  title: "Essay Competition Registration | International Economic Society",
+  title: "EPR Registration | International Economic Society",
   description:
-    "Register for the IES Essay Competition. Free, open to high school students worldwide, chapter affiliation optional.",
+    "Register for the IES Economic Policy Recommendation. $600 in prizes, individual or teams of 2-4, open worldwide.",
 };
 
 export default function RegisterLayout({

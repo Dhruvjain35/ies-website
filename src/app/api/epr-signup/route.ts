@@ -1,5 +1,11 @@
 import { NextResponse } from "next/server";
-import { getPhase, DEADLINE_AT, OPENS_AT, formatDateTime } from "@/lib/competition";
+import {
+  getPhase,
+  DEADLINE_AT,
+  OPENS_AT,
+  formatDateTime,
+  COMPETITION_NAME,
+} from "@/lib/competition";
 import { appendSignup, isDuplicateEmail, isSheetsConfigured } from "@/lib/sheets";
 
 export const runtime = "nodejs";
@@ -8,23 +14,44 @@ export const dynamic = "force-dynamic";
 const WEB3FORMS_KEY =
   process.env.NEXT_PUBLIC_WEB3FORMS_KEY ?? "9f893dcc-01bd-4e27-94ed-0c4247683a35";
 
-const MAX = { name: 120, email: 200, institution: 200, year: 60, country: 80, chapter: 120, angle: 1200 };
+const MAX = {
+  name: 120,
+  email: 200,
+  institution: 200,
+  year: 60,
+  country: 80,
+  chapter: 120,
+  teamName: 120,
+  angle: 1200,
+};
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+const MIN_TEAM = 2;
+const MAX_TEAM = 4;
 
 type Payload = Record<string, unknown>;
 
 const str = (v: unknown) => (typeof v === "string" ? v.trim() : "");
 
 function validate(body: Payload) {
+  const isTeam = str(body.entryType).toLowerCase() === "team";
+
   const fields = {
+    entryType: isTeam ? "Team" : "Individual",
     name: str(body.name),
     email: str(body.email),
     institution: str(body.institution),
     year: str(body.year),
     country: str(body.country),
     chapter: str(body.chapter),
+    teamName: isTeam ? str(body.teamName) : "",
     angle: str(body.angle),
   };
+
+  // Members arrive as an array from the form; tolerate a newline-separated string.
+  const rawMembers = Array.isArray(body.members)
+    ? body.members
+    : str(body.members).split("\n");
+  const members = rawMembers.map((m) => str(m)).filter(Boolean);
 
   const errors: string[] = [];
   for (const key of ["name", "email", "institution", "year", "country"] as const) {
@@ -32,13 +59,25 @@ function validate(body: Payload) {
   }
   if (fields.email && !EMAIL_RE.test(fields.email)) errors.push("email is not valid");
   for (const [key, limit] of Object.entries(MAX)) {
-    if (fields[key as keyof typeof fields].length > limit) {
+    if ((fields[key as keyof typeof fields] ?? "").length > limit) {
       errors.push(`${key} is too long`);
     }
   }
+
+  if (isTeam) {
+    if (!fields.teamName) errors.push("team name is required");
+    if (members.length < MIN_TEAM || members.length > MAX_TEAM) {
+      errors.push(`a team must have between ${MIN_TEAM} and ${MAX_TEAM} members`);
+    }
+    if (members.some((m) => m.length > MAX.name)) errors.push("a member name is too long");
+  }
+
   if (body.original !== true) errors.push("original work must be confirmed");
 
-  return { fields, errors };
+  // Individual entries are recorded as a team of one so the column stays numeric.
+  const size = isTeam ? members.length : 1;
+
+  return { fields, members, size, isTeam, errors };
 }
 
 /** Best-effort per-instance throttle. Not a security boundary, just spam friction. */
@@ -58,22 +97,30 @@ function rateLimited(ip: string): boolean {
 }
 
 /** Notification path. Also the safety net when Sheets is down or unconfigured. */
-async function sendToWeb3Forms(f: Record<string, string>): Promise<boolean> {
+async function sendToWeb3Forms(
+  f: Record<string, string>,
+  members: string[],
+  size: number,
+): Promise<boolean> {
   try {
     const res = await fetch("https://api.web3forms.com/submit", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         access_key: WEB3FORMS_KEY,
-        subject: "IES Essay Competition Registration",
+        subject: `IES ${COMPETITION_NAME} Registration — ${f.entryType}`,
         from_name: f.name,
-        "Participant Name": f.name,
+        "Entry Type": f.entryType,
+        "Team Name": f.teamName || "—",
+        Size: String(size),
+        "Primary Contact": f.name,
         Email: f.email,
         "School / Institution": f.institution,
         "Grade / Year": f.year,
         Country: f.country,
         "IES Chapter": f.chapter || "Not affiliated / none listed",
-        "Working Title or Angle": f.angle || "Not provided",
+        "Team Members": members.length ? members.join(", ") : "—",
+        "Policy Area / Angle": f.angle || "Not provided",
       }),
     });
     const json = await res.json();
@@ -129,7 +176,7 @@ export async function POST(request: Request) {
     );
   }
 
-  const { fields, errors } = validate(body);
+  const { fields, members, size, errors } = validate(body);
   if (errors.length) {
     return NextResponse.json(
       { ok: false, error: "Please check the form and try again.", details: errors },
@@ -153,19 +200,23 @@ export async function POST(request: Request) {
       } else {
         await appendSignup({
           timestamp,
+          entryType: fields.entryType,
+          teamName: fields.teamName || "—",
+          size: String(size),
           name: fields.name,
           email: fields.email,
           institution: fields.institution,
           year: fields.year,
           country: fields.country,
           chapter: fields.chapter || "—",
+          members: members.length ? members.join(", ") : "—",
           angle: fields.angle || "—",
           source: "website",
         });
         sheetOk = true;
       }
     } catch (err) {
-      console.error("[essay-signup] Sheets append failed:", err);
+      console.error("[epr-signup] Sheets append failed:", err);
     }
   }
 
@@ -173,13 +224,14 @@ export async function POST(request: Request) {
     return NextResponse.json({
       ok: true,
       duplicate: true,
-      message: "You are already registered with this email. We have your entry.",
+      message:
+        "This email is already registered. One entry per participant — we have yours.",
     });
   }
 
   // Always mirror to Web3Forms: it is the notification, and the backstop if the
   // Sheets write above threw or was never configured.
-  const mailOk = await sendToWeb3Forms(fields);
+  const mailOk = await sendToWeb3Forms(fields, members, size);
 
   if (!sheetOk && !mailOk) {
     return NextResponse.json(

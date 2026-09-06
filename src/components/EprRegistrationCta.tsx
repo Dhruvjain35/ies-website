@@ -3,10 +3,10 @@
 import Link from "next/link";
 import CompetitionCountdown from "./CompetitionCountdown";
 import { useCompetitionPhase } from "@/hooks/useCompetitionPhase";
-import { PHASE_COPY, formatDateTime, OPENS_AT, DEADLINE_AT } from "@/lib/competition";
+import { PHASE_COPY, PRIZE_POOL, formatDateTime, OPENS_AT, DEADLINE_AT } from "@/lib/competition";
 
-/** Registration call-to-action for the essay section, tracking the live phase. */
-export default function EssayRegistrationCta() {
+/** Registration call-to-action for the EPR section, tracking the live phase. */
+export default function EprRegistrationCta() {
   const state = useCompetitionPhase();
   const phase = state?.phase ?? null;
   const isOpen = phase === "open";
@@ -22,6 +22,9 @@ export default function EssayRegistrationCta() {
             {phase
               ? PHASE_COPY[phase].body
               : `Registration opens ${formatDateTime(OPENS_AT)} and closes ${formatDateTime(DEADLINE_AT)}.`}
+          </p>
+          <p className="mt-2 text-sm text-gold font-semibold">
+            ${PRIZE_POOL} in cash prizes — $300 / $200 / $100 for the top three.
           </p>
         </div>
 

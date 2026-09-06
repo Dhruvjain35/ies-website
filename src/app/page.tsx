@@ -1,7 +1,7 @@
 import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import AnimatedStats from "@/components/AnimatedStats";
-import EssayCompetitionFeature from "@/components/EssayCompetitionFeature";
+import EprCompetitionFeature from "@/components/EprCompetitionFeature";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,7 +12,7 @@ export default function Home() {
       <Navigation />
       <main>
         <Hero />
-        <EssayCompetitionFeature />
+        <EprCompetitionFeature />
         <AnimatedStats />
 
         {/* About / Mission — asymmetric layout with image */}
@@ -308,7 +308,7 @@ export default function Home() {
                 <p className="mt-5 text-base text-text-secondary leading-relaxed max-w-2xl">
                   Your school does not need a chapter for you to be part of the
                   network. Join the Discord, register as a member, and you can enter
-                  the Essay Competition on your own.
+                  the EPR on your own or with a team.
                 </p>
               </div>
               <div className="lg:col-span-5 flex flex-col sm:flex-row lg:flex-col gap-3">
@@ -322,7 +322,7 @@ export default function Home() {
                   href="/register"
                   className="flex-1 text-center px-6 py-4 text-sm text-text-secondary border border-border hover:text-arch-white hover:border-text-muted transition-colors"
                 >
-                  Register for the Essay Competition
+                  Register for the EPR
                 </Link>
               </div>
             </div>
@@ -377,11 +377,11 @@ export default function Home() {
                 className="group border border-border p-8 hover:border-gold/40 transition-colors bg-obsidian"
               >
                 <h3 className="font-serif text-xl font-bold text-arch-white group-hover:text-gold transition-colors mb-2">
-                  Essay Competition
+                  EPR Competition
                 </h3>
                 <p className="text-sm text-text-secondary leading-relaxed mb-4">
-                  One prompt, 1,200 words. Open to any high school student,
-                  chapter or not.
+                  Policy video, $600 in prizes. Enter alone or with a team of
+                  2&ndash;4, chapter or not.
                 </p>
                 <span className="text-sm font-bold text-gold">Register &rarr;</span>
               </Link>

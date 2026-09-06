@@ -63,7 +63,7 @@ export default function ContactPage() {
                 <div className="space-y-4">
                   {[
                     { label: "Join IES", href: "/join", desc: "Get into the Discord and register as a member" },
-                    { label: "Essay Competition", href: "/register", desc: "Register to compete — no chapter required" },
+                    { label: "EPR Competition", href: "/register", desc: "$600 in prizes — individual or teams of 2–4" },
                     { label: "Start a Chapter", href: "/apply", desc: "Apply to launch an IES chapter at your school" },
                     { label: "School Partnership", href: "/partnership", desc: "Partnership proposal for administrators and faculty" },
                     { label: "Growth Internship", href: "/apply", desc: "Coming Soon — applications are not being reviewed yet" },

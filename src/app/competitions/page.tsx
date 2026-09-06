@@ -1,11 +1,13 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Link from "next/link";
-import EssayRegistrationCta from "@/components/EssayRegistrationCta";
+import EprRegistrationCta from "@/components/EprRegistrationCta";
 import {
   OPENS_AT,
   DEADLINE_AT,
   COMPETITION_ENDS_AT,
+  PRIZES,
+  PRIZE_POOL,
   formatDate,
   formatDateTime,
 } from "@/lib/competition";
@@ -27,16 +29,17 @@ export default function CompetitionsPage() {
               Four events. Every cycle. Open to all chapters.
             </h1>
             <p className="mt-4 text-sm text-text-muted">
-              Essay Competition:{" "}
+              Now running —{" "}
               <span className="text-arch-white font-medium">
-                registration {formatDate(OPENS_AT)} – {formatDate(DEADLINE_AT)}
+                EPR registration {formatDate(OPENS_AT)} – {formatDate(DEADLINE_AT)}
               </span>
-              . GEC, EPR, and GRP dates: <span className="text-arch-white font-medium">TBD</span>
+              , ${PRIZE_POOL} in prizes. GEC, GRP, and Essay Competition dates:{" "}
+              <span className="text-arch-white font-medium">TBD</span>
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               {[
                 { label: "GEC", sub: "Individual", href: "#gec" },
-                { label: "EPR", sub: "Team", href: "#epr" },
+                { label: "EPR", sub: "Policy Video", href: "#epr" },
                 { label: "GRP", sub: "Research", href: "#grp" },
                 { label: "ESSAY", sub: "Argument", href: "#essay" },
               ].map((item) => (
@@ -130,29 +133,34 @@ export default function CompetitionsPage() {
               {/* Left: header + format */}
               <div className="lg:col-span-5">
                 <div className="flex flex-wrap items-center gap-3 mb-2">
-                  <span className="text-xs font-bold text-gold">Team</span>
-                  <span className="text-xs text-text-muted">2–4 Members</span>
-                  <span className="text-xs text-text-muted">Live Presentation</span>
+                  <span className="text-xs font-bold text-gold">Individual or Team</span>
+                  <span className="text-xs text-text-muted">1–4 Participants</span>
+                  <span className="text-xs text-text-muted">Recorded Video</span>
+                  <span className="px-2 py-0.5 text-xs font-bold text-obsidian bg-gold">
+                    ${PRIZE_POOL} in prizes
+                  </span>
                 </div>
                 <h2 className="font-serif text-2xl sm:text-3xl font-bold text-arch-white mb-4">
                   Economic Policy Recommendation (EPR)
                 </h2>
                 <p className="text-base text-text-secondary leading-relaxed mb-10">
-                  The EPR is IES&apos;s team presentation event. Teams of 2–4 develop and
-                  deliver a policy proposal responding to an announced theme, presenting
-                  live to a virtual judging panel.
+                  The EPR is IES&apos;s flagship policy event. Entrants answer an
+                  announced theme with a policy of their own design, then record a
+                  video presentation delivering it over a Google Slides deck. Enter
+                  alone or as a team of up to four — the same rubric applies either way.
                 </p>
 
                 <h3 className="text-sm font-bold text-text-muted mb-4">Format</h3>
                 <table className="w-full">
                   <tbody className="divide-y divide-border">
                     {[
-                      ["Team size", "2–4 members"],
-                      ["Presentation", "8 minutes maximum"],
-                      ["Q&A", "Judges may question any team member"],
-                      ["Visual aid", "Slide deck or screen-shared material"],
-                      ["Platform", "Online video conferencing"],
-                      ["Theme", "Announced in advance, same for all teams"],
+                      ["Participants", "Individual, or a team of 2–4"],
+                      ["Deliverable", "Recorded video presentation"],
+                      ["Slides", "Google Slides deck, visible throughout"],
+                      ["Length", "8 minutes maximum"],
+                      ["Speaking", "Every team member must present"],
+                      ["Submission", "Unlisted video link + slide link"],
+                      ["Theme", "Announced in advance, same for all entrants"],
                     ].map(([label, value]) => (
                       <tr key={label}>
                         <td className="py-2.5 pr-4 text-text-muted whitespace-nowrap">{label}</td>
@@ -173,8 +181,8 @@ export default function CompetitionsPage() {
                       "Strength of policy argument",
                       "Use of real-world evidence",
                       "Feasibility of proposed policy",
-                      "Team cohesion & delivery",
-                      "Response to judges' questions",
+                      "Clarity of delivery on camera",
+                      "Quality and design of the deck",
                     ].map((c) => (
                       <div key={c} className="flex items-center gap-2.5">
                         <span className="w-1 h-1 bg-gold shrink-0 rounded-full" />
@@ -184,33 +192,84 @@ export default function CompetitionsPage() {
                   </div>
                 </div>
 
-                <h3 className="text-sm font-bold text-text-muted mb-4">Awards</h3>
+                <h3 className="text-sm font-bold text-text-muted mb-4">Prizes</h3>
                 <table className="w-full">
                   <tbody className="divide-y divide-border">
-                    {[
-                      ["1st Place", "Gold Trophy + Certificate"],
-                      ["2nd Place", "Silver Trophy + Certificate"],
-                      ["3rd Place", "Bronze Trophy + Certificate"],
-                      ["4th–5th", "Medal + Certificate"],
-                    ].map(([place, award]) => (
-                      <tr key={place}>
-                        <td className="py-2.5 pr-4 text-text-muted whitespace-nowrap">{place}</td>
-                        <td className="py-2.5 text-arch-white">{award}</td>
+                    {PRIZES.map((p) => (
+                      <tr key={p.place}>
+                        <td className="py-3 pr-4 text-text-muted whitespace-nowrap">{p.place}</td>
+                        <td className="py-3">
+                          <span
+                            className={
+                              p.cash
+                                ? "font-serif text-xl font-bold text-gold"
+                                : "text-arch-white"
+                            }
+                          >
+                            {p.award}
+                          </span>
+                        </td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
+                <p className="mt-3 text-sm text-text-muted">
+                  ${PRIZE_POOL} in cash awarded per cycle. Team prizes are paid to the
+                  team and split at the team&apos;s discretion.
+                </p>
                 <div className="mt-4 space-y-1 text-text-secondary">
                   <p><strong className="text-arch-white">Best Argument Award:</strong> strongest policy argument</p>
-                  <p><strong className="text-arch-white">Best Delivery Award:</strong> most confident presentation style</p>
-                  <p><strong className="text-arch-white">Chapter Champion:</strong> highest-scoring team per chapter</p>
+                  <p><strong className="text-arch-white">Best Delivery Award:</strong> most compelling presentation on camera</p>
+                  <p><strong className="text-arch-white">Chapter Champion:</strong> highest-scoring entry per chapter</p>
                 </div>
               </div>
             </div>
 
-            <div className="mt-8 text-text-secondary">
-              <strong className="text-text-muted">Eligibility:</strong> Teams of 2–4 active IES chapter members from the same chapter, currently enrolled in high school. Stable internet connection required.
+            {/* Submission requirements */}
+            <div className="mt-14 bg-obsidian-light border border-border p-8 sm:p-10">
+              <h3 className="text-sm font-bold text-gold tracking-[0.2em] uppercase mb-8">
+                How to Submit
+              </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                {[
+                  {
+                    title: "Build the deck",
+                    text: "A Google Slides presentation carrying your policy: the problem, your recommendation, the evidence, and the trade-offs you accept.",
+                  },
+                  {
+                    title: "Record the video",
+                    text: "Screen-record the deck with your audio over it. Faces on camera are welcome but not required — the deck must be readable the whole way through.",
+                  },
+                  {
+                    title: "Keep it to 8 minutes",
+                    text: "Anything past 8:00 is not watched. Every member of a team must speak for a meaningful portion.",
+                  },
+                  {
+                    title: "Submit two links",
+                    text: "An unlisted YouTube or Drive video link and a view-access Slides link, both set so anyone with the link can open them.",
+                  },
+                ].map((step, i) => (
+                  <div key={step.title}>
+                    <span className="text-xs font-bold text-gold">{String(i + 1).padStart(2, "0")}</span>
+                    <h4 className="mt-2 text-sm font-semibold text-arch-white">{step.title}</h4>
+                    <p className="mt-1.5 text-sm text-text-secondary leading-relaxed">{step.text}</p>
+                  </div>
+                ))}
+              </div>
+              <p className="mt-8 pt-6 border-t border-border text-sm text-text-secondary">
+                Submission instructions and the upload form are emailed to every
+                registrant when the theme is released. Entries are judged on the
+                recording alone — there is no live session to attend, so entrants in
+                any timezone compete on equal terms.
+              </p>
             </div>
+
+            <div className="mt-8 text-text-secondary">
+              <strong className="text-text-muted">Eligibility:</strong> Open to high school students worldwide, entering individually or in teams of 2–4. Team members do not need to attend the same school. Chapter membership is not required, though chapter members are eligible for the Chapter Champion award. All work must be original and free of AI-generated content.
+            </div>
+
+            {/* Registration CTA — phase-aware */}
+            <EprRegistrationCta />
           </div>
         </section>
 
@@ -460,8 +519,52 @@ export default function CompetitionsPage() {
               <strong className="text-text-muted">Eligibility:</strong> Open to any high school student. Unlike the GEC, EPR, and GRP, chapter membership is <span className="text-arch-white">not required</span> to enter — though chapter members remain eligible for the Chapter Champion award. All work must be original and free of AI-generated content.
             </div>
 
-            {/* Registration CTA — phase-aware */}
-            <EssayRegistrationCta />
+            {/* Sample prompts — illustrative, the live prompt is not published */}
+            <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+              <div className="lg:col-span-4">
+                <h3 className="text-sm font-bold text-gold tracking-[0.2em] uppercase mb-4">
+                  Sample Prompts
+                </h3>
+                <p className="text-sm text-text-secondary leading-relaxed">
+                  The live prompt is not published in advance. These are the shape of
+                  question to expect: contested, answerable from either side, and
+                  impossible to resolve by looking something up.
+                </p>
+              </div>
+              <div className="lg:col-span-7 lg:col-start-6">
+                <div className="border-t border-border">
+                  {[
+                    "Central banks have targeted 2% inflation for three decades. Should that target be higher?",
+                    "Does industrial policy do more good than harm in developing economies?",
+                    "A country discovers a large resource windfall. Is a sovereign wealth fund the responsible use of it?",
+                  ].map((prompt, i) => (
+                    <div key={prompt} className="flex items-start gap-5 border-b border-border py-6">
+                      <span className="text-xs font-bold text-gold mt-1 shrink-0">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <p className="font-serif text-lg text-arch-white leading-snug">{prompt}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Not the active cycle — EPR is the event currently open */}
+            <div className="mt-10 border border-border bg-obsidian-light p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+              <div>
+                <p className="text-sm font-bold text-arch-white">Not the current cycle</p>
+                <p className="mt-1.5 text-sm text-text-secondary max-w-xl">
+                  The Essay Competition is not the event currently accepting entries.
+                  The EPR is open this cycle — dates and registration are above.
+                </p>
+              </div>
+              <Link
+                href="/competitions#epr"
+                className="shrink-0 px-6 py-3 text-sm font-bold text-obsidian bg-gold hover:bg-gold-dark transition-colors"
+              >
+                Go to the EPR
+              </Link>
+            </div>
           </div>
         </section>
 

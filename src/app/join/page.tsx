@@ -44,7 +44,7 @@ const steps = [
   },
   {
     title: "Compete or start a chapter",
-    text: "Enter the Essay Competition on your own, or bring IES to your school as a full chapter.",
+    text: "Enter the EPR alone or with a team of 2–4, or bring IES to your school as a full chapter.",
   },
 ];
 
@@ -283,7 +283,7 @@ export default function JoinPage() {
                       href="/register"
                       className="px-5 py-2.5 text-xs text-text-secondary border border-border hover:text-arch-white hover:border-text-muted transition-colors"
                     >
-                      Essay Competition
+                      EPR Competition
                     </Link>
                   </div>
                 </div>

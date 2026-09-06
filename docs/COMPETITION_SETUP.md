@@ -1,6 +1,8 @@
-# Essay Competition — signup backend setup
+# Competition signup backend setup
 
-Signups POST to `/api/essay-signup`, which writes a row to Google Sheets and
+The active cycle is the **Economic Policy Recommendation (EPR)**.
+
+Signups POST to `/api/epr-signup`, which writes a row to Google Sheets and
 sends an email notification through Web3Forms.
 
 **The email path already works.** Google Sheets needs three environment
@@ -14,7 +16,7 @@ still accepts registrations and reports `recorded: { sheet: false, email: true }
 | --- | --- |
 | Registration opens | 12 September 2026, 9:00 AM |
 | Entries close | 3 October 2026, 11:59 PM |
-| Competition ends | 17 October 2026, 11:59 PM |
+| Judging ends | 17 October 2026, 11:59 PM |
 
 These live in `src/lib/competition.ts` and are the single source of truth — the
 landing page countdown, the competitions page, the registration form, and the
@@ -65,7 +67,7 @@ that file. A future cycle crossing the November DST change must use `-06:00`.
 ## Verifying it works
 
 ```
-curl https://www.internationaleconomicsociety.org/api/essay-signup
+curl https://www.internationaleconomicsociety.org/api/epr-signup
 ```
 
 Returns the authoritative phase and whether Sheets is wired up:
@@ -81,15 +83,27 @@ refuses entries before then.
 ## The table
 
 The header row is written automatically on the first signup, then bolded,
-shaded, and frozen. Columns:
+shaded, and frozen. Thirteen columns, A through M:
 
-| A | B | C | D | E | F | G | H | I |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Timestamp (CT) | Name | Email | School / Institution | Grade / Year | Country | IES Chapter | Working Title or Angle | Source |
+| Col | Field |
+| --- | --- |
+| A | Timestamp (CT) |
+| B | Entry Type — `Individual` or `Team` |
+| C | Team Name (`—` for individuals) |
+| D | Size — 1 for an individual, 2–4 for a team |
+| E | Primary Contact |
+| F | Email |
+| G | School / Institution |
+| H | Grade / Year |
+| I | Country |
+| J | IES Chapter |
+| K | Team Members (comma separated) |
+| L | Policy Area / Angle |
+| M | Source |
 
 Duplicate emails are rejected before the write — a repeat registration returns a
 friendly "already registered" instead of adding a second row. The check is
-case-insensitive.
+case-insensitive and reads column F.
 
 ## If something goes wrong
 
@@ -97,6 +111,6 @@ Signups are never dropped silently. The endpoint only returns an error when
 *both* the sheet write and the email failed, and in that case the participant is
 told to email `ies.economicsociety@gmail.com` directly.
 
-Failures are logged to the Vercel function logs with the `[essay-signup]`
+Failures are logged to the Vercel function logs with the `[epr-signup]`
 prefix. The usual cause is step 3 — the sheet not shared with the service
 account.
