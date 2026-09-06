@@ -1,6 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import ImageBand from "@/components/ImageBand";
+import SectionArt from "@/components/SectionArt";
 import Link from "next/link";
 
 export const metadata = {
@@ -99,14 +99,7 @@ export default function AboutPage() {
         {/* Why IES Exists & How It Works — zigzag layout */}
         <section className="py-20 sm:py-28">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
-            <ImageBand
-              src="/images/capitol.jpg"
-              alt="The west front of the United States Capitol."
-              caption="The United States Capitol."
-              credit="Architect of the Capitol. Public domain."
-              aspect="aspect-[21/9]"
-              className="mb-16"
-            />
+            <SectionArt band="globe" className="mb-16" />
 
             {/* Why */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start">

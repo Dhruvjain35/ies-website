@@ -10,7 +10,6 @@ credited in its caption on the page and listed here.
 | `fed-eccles.jpg` | Marriner S. Eccles Federal Reserve Board Building, Washington D.C. | Wikimedia Commons | Public domain |
 | `nyse-floor.jpg` | New York Stock Exchange trading floor | Library of Congress (LC-U9-10548-6) | Public domain |
 | `loc-readingroom.jpg` | Main Reading Room, Library of Congress | Carol M. Highsmith / Library of Congress | Public domain |
-| `capitol.jpg` | United States Capitol, west front | Architect of the Capitol | Public domain |
 
 All files were downsized to 1600px on the long edge and re-encoded for the web.
 
