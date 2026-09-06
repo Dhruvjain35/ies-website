@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import Link from "next/link";
 import EprRegistrationCta from "@/components/EprRegistrationCta";
+import SectionArt from "@/components/SectionArt";
 import {
   OPENS_AT,
   DEADLINE_AT,
@@ -76,6 +77,8 @@ export default function CompetitionsPage() {
               reasoning to situations drawn from international markets, public policy,
               and global trade.
             </p>
+
+            <SectionArt band="ticker" className="mb-12" />
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
               <div>
@@ -152,6 +155,8 @@ export default function CompetitionsPage() {
                   video presentation delivering it over a Google Slides deck. Enter
                   alone or as a team of up to four — the same rubric applies either way.
                 </p>
+
+                <SectionArt band="policy" aspect="aspect-[5/2]" className="mb-10" />
 
                 <h3 className="text-sm font-bold text-text-muted mb-4">Format</h3>
                 <table className="w-full">
@@ -293,6 +298,8 @@ export default function CompetitionsPage() {
               connected to that nation. The GRP rewards depth of research, quality of argument, and
               strength of academic writing.
             </p>
+
+            <SectionArt band="globe" className="mb-12" />
 
             {/* Three-column layout */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

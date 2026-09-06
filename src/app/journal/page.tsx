@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import Image from "next/image";
 import PublicationBrowser from "@/components/PublicationBrowser";
+import SectionArt from "@/components/SectionArt";
 import {
   PUBLICATIONS,
   ISSN,
@@ -110,6 +111,8 @@ export default function JournalPage() {
                 </div>
               </div>
             </div>
+
+            <SectionArt band="archive" className="mb-12" />
 
             <PublicationBrowser />
           </div>

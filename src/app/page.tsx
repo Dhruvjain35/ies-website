@@ -2,6 +2,7 @@ import Navigation from "@/components/Navigation";
 import Hero from "@/components/Hero";
 import AnimatedStats from "@/components/AnimatedStats";
 import EprCompetitionFeature from "@/components/EprCompetitionFeature";
+import FeatureTile from "@/components/FeatureTile";
 import Footer from "@/components/Footer";
 import Image from "next/image";
 import Link from "next/link";
@@ -14,6 +15,38 @@ export default function Home() {
         <Hero />
         <EprCompetitionFeature />
         <AnimatedStats />
+
+        {/* Three tiles — the main routes into IES */}
+        <section className="py-16 sm:py-20">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+              <FeatureTile
+                eyebrow="Journal"
+                title="A permanent home for student research"
+                description="An open archive of the work produced through IES competitions, and a publication venue for student papers in economics."
+                href="/journal"
+                action="Open the journal"
+                motif="journal"
+              />
+              <FeatureTile
+                eyebrow="Compete"
+                title="Four events, every cycle"
+                description="Policy videos, research papers, timed reasoning, and argument. Cash prizes, certificates, and a route into the journal."
+                href="/competitions"
+                action="See the competitions"
+                motif="ranked"
+              />
+              <FeatureTile
+                eyebrow="Chapters"
+                title="Sixteen chapters, five continents"
+                description="Student-led economics societies in twelve countries, with branding, a playbook, and mentorship provided free."
+                href="/impact"
+                action="Meet the chapters"
+                motif="network"
+              />
+            </div>
+          </div>
+        </section>
 
         {/* About / Mission — asymmetric layout with image */}
         <section className="py-20 sm:py-28">

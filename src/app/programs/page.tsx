@@ -1,5 +1,6 @@
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SectionArt from "@/components/SectionArt";
 import Link from "next/link";
 
 export const metadata = {
@@ -45,6 +46,8 @@ export default function ProgramsPage() {
         {/* Session formats — 2x2 card grid */}
         <section className="bg-obsidian-light py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <SectionArt band="ticker" className="mb-14" />
+
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-arch-white mb-4">
               Session Formats
             </h2>

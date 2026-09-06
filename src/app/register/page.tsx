@@ -4,6 +4,7 @@ import { useRef, useState, FormEvent } from "react";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SectionArt from "@/components/SectionArt";
 import CompetitionCountdown from "@/components/CompetitionCountdown";
 import { useCompetitionPhase } from "@/hooks/useCompetitionPhase";
 import { inputClass, labelClass, type FormStatus } from "@/lib/web3forms";
@@ -448,6 +449,8 @@ export default function RegisterPage() {
 
               {/* Requirements */}
               <div>
+                <SectionArt band="policy" aspect="aspect-[5/2]" className="mb-8" />
+
                 <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-8">
                   What You Are Signing Up For
                 </h2>

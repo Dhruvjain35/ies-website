@@ -4,6 +4,7 @@ import { useRef, useState, FormEvent } from "react";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
+import SectionArt from "@/components/SectionArt";
 import {
   submitToWeb3Forms,
   inputClass,
@@ -139,6 +140,8 @@ export default function JoinPage() {
 
               {/* Right: what's inside */}
               <div className="lg:col-span-6 lg:col-start-7">
+                <SectionArt band="network" aspect="aspect-[5/2]" className="mb-8" />
+
                 <h3 className="text-sm font-bold text-text-muted mb-6">
                   What is inside
                 </h3>
