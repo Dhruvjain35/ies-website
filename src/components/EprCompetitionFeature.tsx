@@ -9,6 +9,7 @@ import {
   COMPETITION_ENDS_AT,
   PRIZES,
   PRIZE_POOL,
+  VIDEO_LENGTH_LABEL,
   formatShort,
   formatDate,
   type Phase,
@@ -74,7 +75,7 @@ export default function EprCompetitionFeature() {
 
             <p className="mt-6 text-base sm:text-lg text-text-secondary leading-relaxed max-w-xl">
               Design a policy for an announced economic theme, then make the case for
-              it in an eight-minute video presentation over a Google Slides deck.
+              it in a {VIDEO_LENGTH_LABEL} video presentation over a Google Slides deck.
               Enter alone or with a team of up to four. No live session, no timezone
               penalty — you record it, we judge it.
             </p>

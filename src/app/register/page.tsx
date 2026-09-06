@@ -13,6 +13,9 @@ import {
   COMPETITION_ENDS_AT,
   PRIZES,
   PRIZE_POOL,
+  VIDEO_LENGTH_LABEL,
+  VIDEO_MIN_MINUTES,
+  VIDEO_MAX_MINUTES,
   PHASE_COPY,
   formatDateTime,
   formatDate,
@@ -23,7 +26,7 @@ const MAX_TEAM = 4;
 
 const requirements: [string, string][] = [
   ["Participants", "Individual, or a team of 2–4"],
-  ["Deliverable", "Recorded video, 8 minutes max"],
+  ["Deliverable", `Recorded video, ${VIDEO_LENGTH_LABEL}`],
   ["Slides", "Google Slides deck, visible throughout"],
   ["Registration opens", formatDateTime(OPENS_AT)],
   ["Entries close", formatDateTime(DEADLINE_AT)],
@@ -49,7 +52,7 @@ const faqs = [
   },
   {
     q: "How long can the video be?",
-    a: "Eight minutes maximum. Judges stop watching at 8:00, so anything after that is not scored. There is no minimum, but a strong policy case rarely fits in under four.",
+    a: `Between ${VIDEO_MIN_MINUTES} and ${VIDEO_MAX_MINUTES} minutes. Judges stop watching at ${VIDEO_MAX_MINUTES}:00, so anything after that is not scored, and an entry under ${VIDEO_MIN_MINUTES}:00 is treated as under length and marked down. Aim to land comfortably inside the window rather than at either edge.`,
   },
   {
     q: "Does every team member have to speak?",
@@ -162,8 +165,8 @@ export default function RegisterPage() {
                 </h1>
                 <p className="mt-6 max-w-2xl text-lg text-text-secondary leading-relaxed">
                   Design a policy for the announced theme and make the case for it in an
-                  eight-minute video over a Google Slides deck. Enter alone or with a
-                  team of up to four.
+                  {VIDEO_LENGTH_LABEL} video over a Google Slides deck. Enter alone or
+                  with a team of up to four.
                 </p>
 
                 <div className="mt-7 flex flex-wrap gap-3">
@@ -488,8 +491,8 @@ export default function RegisterPage() {
                     Read the full rules first
                   </h3>
                   <p className="text-sm text-text-secondary leading-relaxed mb-4">
-                    Submission format, judging criteria, and the eight-minute limit are
-                    set out in full on the competitions page.
+                    Submission format, judging criteria, and the {VIDEO_LENGTH_LABEL}{" "}
+                    limit are set out in full on the competitions page.
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <Link

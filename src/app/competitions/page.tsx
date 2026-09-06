@@ -8,6 +8,9 @@ import {
   COMPETITION_ENDS_AT,
   PRIZES,
   PRIZE_POOL,
+  VIDEO_LENGTH_LABEL,
+  VIDEO_MIN_MINUTES,
+  VIDEO_MAX_MINUTES,
   formatDate,
   formatDateTime,
 } from "@/lib/competition";
@@ -157,7 +160,7 @@ export default function CompetitionsPage() {
                       ["Participants", "Individual, or a team of 2–4"],
                       ["Deliverable", "Recorded video presentation"],
                       ["Slides", "Google Slides deck, visible throughout"],
-                      ["Length", "8 minutes maximum"],
+                      ["Length", VIDEO_LENGTH_LABEL],
                       ["Speaking", "Every team member must present"],
                       ["Submission", "Unlisted video link + slide link"],
                       ["Theme", "Announced in advance, same for all entrants"],
@@ -241,8 +244,8 @@ export default function CompetitionsPage() {
                     text: "Screen-record the deck with your audio over it. Faces on camera are welcome but not required — the deck must be readable the whole way through.",
                   },
                   {
-                    title: "Keep it to 8 minutes",
-                    text: "Anything past 8:00 is not watched. Every member of a team must speak for a meaningful portion.",
+                    title: `Keep it to ${VIDEO_LENGTH_LABEL}`,
+                    text: `Under ${VIDEO_MIN_MINUTES}:00 is under length and scored down; anything past ${VIDEO_MAX_MINUTES}:00 is not watched. Every member of a team must speak for a meaningful portion.`,
                   },
                   {
                     title: "Submit two links",

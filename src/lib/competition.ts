@@ -36,6 +36,12 @@ export const PRIZE_POOL = PRIZES.filter((p) => p.cash).reduce(
   0,
 );
 
+/** Video presentation length. Under the minimum is scored down; past the
+ *  maximum is not watched. */
+export const VIDEO_MIN_MINUTES = 6;
+export const VIDEO_MAX_MINUTES = 8;
+export const VIDEO_LENGTH_LABEL = `${VIDEO_MIN_MINUTES}\u2013${VIDEO_MAX_MINUTES} minutes`;
+
 export type Phase = "upcoming" | "open" | "competition" | "closed";
 
 /** Which stage of the cycle a given instant falls in. */
