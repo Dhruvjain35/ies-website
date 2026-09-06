@@ -3,7 +3,6 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import EprRegistrationCta from "@/components/EprRegistrationCta";
 import SectionArt from "@/components/SectionArt";
-import ImageBand from "@/components/ImageBand";
 import {
   OPENS_AT,
   DEADLINE_AT,
@@ -157,14 +156,7 @@ export default function CompetitionsPage() {
                   alone or as a team of up to four — the same rubric applies either way.
                 </p>
 
-                <ImageBand
-                  src="/images/fiscal-chart.jpg"
-                  alt="Francis A. Walker's 1874 fiscal chart of the United States, showing federal revenue, public debt and expenditure from 1789 to 1870."
-                  caption="Fiscal Chart of the United States, 1789–1870."
-                  credit="Francis A. Walker, 1874. Public domain."
-                  aspect="aspect-[4/3]"
-                  className="mb-10"
-                />
+                <SectionArt band="policy" aspect="aspect-[5/2]" className="mb-10" />
 
                 <h3 className="text-sm font-bold text-text-muted mb-4">Format</h3>
                 <table className="w-full">
@@ -325,13 +317,7 @@ export default function CompetitionsPage() {
               strength of academic writing.
             </p>
 
-            <ImageBand
-              src="/images/loc-readingroom.jpg"
-              alt="The Main Reading Room of the Library of Congress, seen from the visitors' gallery."
-              caption="Main Reading Room, Library of Congress."
-              credit="Carol M. Highsmith / Library of Congress. Public domain."
-              className="mb-12"
-            />
+            <SectionArt band="globe" className="mb-12" />
 
             {/* Three-column layout */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">

@@ -3,7 +3,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import Image from "next/image";
 import PublicationBrowser from "@/components/PublicationBrowser";
-import ImageBand from "@/components/ImageBand";
+import SectionArt from "@/components/SectionArt";
 import {
   PUBLICATIONS,
   ISSN,
@@ -112,14 +112,7 @@ export default function JournalPage() {
               </div>
             </div>
 
-            <ImageBand
-              src="/images/fiscal-chart.jpg"
-              alt="An 1874 statistical plate charting United States federal revenue, public debt and expenditure."
-              caption="Fiscal Chart of the United States, 1789–1870 — an early landmark in economic data visualisation."
-              credit="Francis A. Walker, 1874. Public domain."
-              aspect="aspect-[5/2]"
-              className="mb-12"
-            />
+            <SectionArt band="archive" className="mb-12" />
 
             <PublicationBrowser />
           </div>

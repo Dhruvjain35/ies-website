@@ -170,6 +170,13 @@ export default function EprCompetitionFeature() {
                 {cta.label}
               </Link>
 
+              <Link
+                href="/competitions/sample-case"
+                className="mt-3 block w-full text-center px-6 py-3 text-xs font-bold uppercase tracking-widest text-text-secondary border border-border hover:text-arch-white hover:border-gold/50 transition-colors"
+              >
+                Read the sample case
+              </Link>
+
               <p className="mt-4 text-xs text-text-muted text-center">
                 {phase === "open"
                   ? "Free to enter. Individual or team of 2–4."
