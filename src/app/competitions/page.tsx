@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import Link from "next/link";
 import EprRegistrationCta from "@/components/EprRegistrationCta";
 import SectionArt from "@/components/SectionArt";
+import ImageBand from "@/components/ImageBand";
 import {
   OPENS_AT,
   DEADLINE_AT,
@@ -156,7 +157,14 @@ export default function CompetitionsPage() {
                   alone or as a team of up to four — the same rubric applies either way.
                 </p>
 
-                <SectionArt band="policy" aspect="aspect-[5/2]" className="mb-10" />
+                <ImageBand
+                  src="/images/fiscal-chart.jpg"
+                  alt="Francis A. Walker's 1874 fiscal chart of the United States, showing federal revenue, public debt and expenditure from 1789 to 1870."
+                  caption="Fiscal Chart of the United States, 1789–1870."
+                  credit="Francis A. Walker, 1874. Public domain."
+                  aspect="aspect-[4/3]"
+                  className="mb-10"
+                />
 
                 <h3 className="text-sm font-bold text-text-muted mb-4">Format</h3>
                 <table className="w-full">
@@ -276,6 +284,24 @@ export default function CompetitionsPage() {
               <strong className="text-text-muted">Eligibility:</strong> Open to high school students worldwide, entering individually or in teams of 2–4. Team members do not need to attend the same school. Chapter membership is not required, though chapter members are eligible for the Chapter Champion award. All work must be original and free of AI-generated content.
             </div>
 
+            {/* Practice material */}
+            <div className="mt-12 border border-border p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+              <div>
+                <p className="text-sm font-bold text-arch-white">Practise on a sample case</p>
+                <p className="mt-1.5 text-sm text-text-secondary max-w-xl">
+                  A full case written to the same shape as a live theme — a US
+                  Treasury brief on the mortgage lock-in problem, with constraints and
+                  five directions you could argue.
+                </p>
+              </div>
+              <Link
+                href="/competitions/sample-case"
+                className="shrink-0 px-6 py-3 text-sm font-bold text-arch-white border border-gold/50 hover:bg-gold hover:text-obsidian transition-colors"
+              >
+                Open the sample case
+              </Link>
+            </div>
+
             {/* Registration CTA — phase-aware */}
             <EprRegistrationCta />
           </div>
@@ -299,7 +325,13 @@ export default function CompetitionsPage() {
               strength of academic writing.
             </p>
 
-            <SectionArt band="globe" className="mb-12" />
+            <ImageBand
+              src="/images/loc-readingroom.jpg"
+              alt="The Main Reading Room of the Library of Congress, seen from the visitors' gallery."
+              caption="Main Reading Room, Library of Congress."
+              credit="Carol M. Highsmith / Library of Congress. Public domain."
+              className="mb-12"
+            />
 
             {/* Three-column layout */}
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
