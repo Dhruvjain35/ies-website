@@ -22,7 +22,7 @@ export const ISSN: string | null = null;
 
 export type PublicationType = "journal" | "archive";
 export type Distinction = "distinguished" | "outstanding" | null;
-export type SourceCompetition = "GRP" | "EPR" | "IEC" | null;
+export type SourceCompetition = "GRP" | "EPR" | null;
 
 export type Publication = {
   /** Stable record id, e.g. IES-J-2026-0001 or IES-RA-2026-0001. */
@@ -72,7 +72,6 @@ export const COMPETITION_LABEL: Record<
 > = {
   GRP: "Global Research Paper",
   EPR: "Economic Policy Recommendation",
-  IEC: "Essay Competition",
 };
 
 export const getPublication = (id: string) =>

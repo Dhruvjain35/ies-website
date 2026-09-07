@@ -26,15 +26,15 @@ export default function Home() {
                 description="An open archive of the work produced through IES competitions, and a publication venue for student papers in economics."
                 href="/journal"
                 action="Open the journal"
-                image="/images/loc-readingroom.jpg"
+                motif="journal"
               />
               <FeatureTile
                 eyebrow="Compete"
-                title="Four events, every cycle"
-                description="Policy videos, research papers, timed reasoning, and argument. Cash prizes, certificates, and a route into the journal."
+                title="Three events, every cycle"
+                description="Policy videos, research papers, and timed reasoning. Cash prizes, certificates, and a route into the journal."
                 href="/competitions"
                 action="See the competitions"
-                image="/images/nyse-floor.jpg"
+                motif="ranked"
               />
               <FeatureTile
                 eyebrow="Chapters"

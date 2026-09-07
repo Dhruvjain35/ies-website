@@ -1,54 +1,78 @@
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import ImageBand from "@/components/ImageBand";
+import SectionArt from "@/components/SectionArt";
 import { VIDEO_LENGTH_LABEL, PRIZE_POOL } from "@/lib/competition";
 
 export const metadata = {
   title: "EPR Sample Case | International Economic Society",
   description:
-    "A practice case for the IES Economic Policy Recommendation: the mortgage lock-in problem, advising the U.S. Department of the Treasury.",
+    "A practice case for the IES Economic Policy Recommendation: the federal minimum wage as a price floor, presented to the U.S. Department of Labor.",
 };
 
-const figures: [string, string][] = [
-  ["Outstanding mortgages below 4%", "≈ 55% of all US mortgages"],
-  ["Current 30-year fixed rate", "≈ 6.8%"],
-  ["Monthly payment, $400k loan at 3%", "≈ $1,690"],
-  ["Same loan at 6.8%", "≈ $2,610"],
-  ["Existing-home sales, annualised", "≈ 4.1m — near a 30-year low"],
-  ["Median existing-home price", "≈ $415,000"],
-  ["Interstate migration rate", "Lowest in the post-war record"],
+const situation: [string, string][] = [
+  ["Federal minimum wage", "$7.25 — unchanged since July 2009"],
+  ["Real value at its 1968 peak", "≈ $13.50 in today's dollars"],
+  ["States at the federal floor", "20"],
+  ["Highest state floor", "≈ $17.50"],
+  ["US median hourly wage", "≈ $23.50"],
+  ["Median hourly wage, Mississippi", "≈ $17.80"],
+  ["Median hourly wage, Massachusetts", "≈ $29.90"],
+  ["Hourly workers at or below $7.25", "≈ 1% of the hourly workforce"],
 ];
 
-const approaches = [
+const dimensions = [
   {
-    title: "Make the rate portable",
-    text: "Let a borrower carry an existing rate to a new property. Removes the penalty on moving directly. Ask who absorbs the loss on the below-market loan, and what it does to the mortgage-backed securities the loan sits inside.",
+    title: "Earnings",
+    text: "A binding floor raises the wage of everyone who keeps their hours. That is the whole point, and it is a real gain worth defending.",
   },
   {
-    title: "Change the tax treatment of moving",
-    text: "The capital gains exclusion on a primary residence has not been indexed since 1997. Raising or indexing it lowers the tax cost of selling. Ask whether the binding constraint is really the tax bill or the interest rate.",
+    title: "Access to work",
+    text: "If the floor sits above what an employer will pay for an hour of low-experience labour, some of those hours stop being offered. Who loses them matters more than how many.",
   },
   {
-    title: "Condition federal money on local supply",
-    text: "Zoning is set locally, so Washington cannot rezone anything. It can attach conditions to the transport and housing money it already sends. Ask how long supply takes to respond, and whether the leverage is real.",
+    title: "Long-run cost",
+    text: "Employers can absorb a floor through prices, hours, scheduling, or automation. Each shifts the cost somewhere different, and some of those shifts take years to appear.",
   },
   {
-    title: "Support first-time buyers directly",
-    text: "A credit or rate buydown aimed at buyers locked out of the market. Ask the hard question honestly: with supply this tight, how much of the subsidy ends up in the price rather than in the buyer's pocket?",
+    title: "Equity",
+    text: "Most minimum-wage earners are not teenagers, and most poor households have no one earning the minimum because they are not working at all. A wage floor cannot reach them.",
   },
   {
-    title: "Recommend no new policy",
-    text: "Argue the distortion unwinds on its own as rates normalise and the low-rate stock ages out, and that intervening now risks locking in a worse structure. A well-argued case for restraint is a legitimate recommendation.",
+    title: "Regional fairness",
+    text: "$15 is a different policy in Jackson than in Boston. A national number binds hard in low-wage states and does nothing in high-wage ones.",
+  },
+];
+
+const options = [
+  {
+    title: "Raise the uniform federal floor",
+    text: "Pick a national number and phase it in. Simple to legislate and to explain, and it reaches the low-wage states nothing else reaches. The bite is severe where median wages are lowest — exactly where the political case is strongest.",
+  },
+  {
+    title: "Index the floor to local wages",
+    text: "Set the floor as a share of each area's median wage — half, say — so it adjusts automatically to local conditions. Economically tidy. Ask how a worker is meant to plan around a wage that moves with a statistic, and what happens at county lines.",
+  },
+  {
+    title: "Expand the Earned Income Tax Credit instead",
+    text: "Raise take-home pay through the tax code rather than the wage. Reaches poor households more precisely and does not price anyone out of a job. It is paid by taxpayers rather than employers, and some of it is captured by employers as lower pre-tax wages.",
+  },
+  {
+    title: "Subsidise the wage directly",
+    text: "Government pays part of the hourly cost for low-wage workers, so the worker gets more without the employer paying more. Splits the difference between the two above. Ask what it costs, and what stops it becoming a permanent subsidy to low-wage business models.",
+  },
+  {
+    title: "Leave the federal floor alone",
+    text: "Thirty states and many cities have already moved past $7.25, and the federal minimum now binds for around one percent of hourly workers. Argue that the states are doing this better than Washington can, and that the binding constraint is elsewhere.",
   },
 ];
 
 const strong = [
-  "Names a mechanism, not a goal. “Improve affordability” is an aim; “reduce the effective cost of moving by X” is a policy.",
-  "States who pays. Every recommendation has someone bearing the cost — taxpayers, lenders, existing owners, future buyers.",
-  "Meets the strongest objection to its own proposal, rather than the weakest.",
-  "Knows when a subsidy is capitalised into the price of the thing it subsidises.",
-  "Says what it would take to conclude the policy had failed.",
+  "Explains what a price floor does before arguing about this one — and says plainly when it binds and when it does not.",
+  "Engages the monopsony argument honestly. If employers have wage-setting power, a floor can raise pay without cutting jobs. That is a real finding, and it has limits.",
+  "Distinguishes the number from the design. Phase-in length, indexation, and regional variation change the effect more than the headline figure.",
+  "Names who pays: consumers through prices, workers through hours, employers through margin, or taxpayers through the tax code.",
+  "Says what evidence would show the policy had failed, and when you would know.",
 ];
 
 export default function SampleCasePage() {
@@ -74,109 +98,95 @@ export default function SampleCasePage() {
               </span>
             </div>
             <h1 className="mt-5 font-serif text-3xl sm:text-4xl lg:text-5xl font-bold text-arch-white leading-tight max-w-4xl">
-              The household that cannot afford to move
+              A floor under the lowest wage
             </h1>
-            <p className="mt-6 max-w-2xl text-lg text-text-secondary leading-relaxed">
-              A practice case for the Economic Policy Recommendation, written to the
-              same shape as a live theme. Work it end to end and you will have
-              rehearsed the whole event.
-            </p>
             <div className="mt-8 border-l-2 border-gold pl-5">
               <p className="text-xs uppercase tracking-widest text-text-muted">
-                You are advising
+                You are presenting to
               </p>
               <p className="mt-1.5 font-serif text-xl font-bold text-arch-white">
-                The U.S. Department of the Treasury, Office of Economic Policy
+                The U.S. Department of Labor, Office of the Chief Economist
               </p>
             </div>
           </div>
         </section>
 
-        <div className="mx-auto max-w-7xl px-6 lg:px-8">
-          <ImageBand
-            src="/images/fed-eccles.jpg"
-            alt="The Marriner S. Eccles Federal Reserve Board building in Washington, D.C."
-            caption="The Marriner S. Eccles Building, Washington, D.C. — the rate decisions behind this case are taken here; the policy response you are asked for is not."
-            credit="Public domain."
-            aspect="aspect-[21/9]"
-            priority
-          />
+        {/* The prompt itself */}
+        <section className="border-y border-border bg-obsidian-light py-14">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-6">
+              The prompt
+            </h2>
+            <p className="max-w-4xl text-lg sm:text-xl text-arch-white leading-relaxed font-serif">
+              The federal minimum wage has not moved since 2009, and proposals to
+              raise it have revived debate over the wage floor — a price floor that
+              can lift earnings for low-paid workers but may also reduce the hours
+              employers offer, push costs into consumer prices, or accelerate
+              automation. Policymakers must weigh these effects against how any
+              approach would affect earnings, access to work, long-run costs, equity,
+              and the very different labour markets of a country where the median
+              wage in one state is nearly double that in another. Your team is
+              presenting to officials at the Department of Labor. Explain the economic
+              impacts of a wage floor, weigh the alternatives to raising it, and offer
+              a clear path forward.
+            </p>
+          </div>
+        </section>
+
+        <div className="mx-auto max-w-7xl px-6 lg:px-8 pt-16">
+          <SectionArt band="policy" />
         </div>
 
-        {/* The situation */}
+        {/* Situation + economics */}
         <section className="py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
               <div className="lg:col-span-6">
                 <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-6">
-                  The situation
+                  The economics you are expected to explain
                 </h2>
                 <div className="space-y-5 text-base text-text-secondary leading-relaxed">
                   <p>
-                    Between 2020 and 2022, tens of millions of American households
-                    borrowed or refinanced at thirty-year fixed rates near three
-                    percent. Rates have since roughly doubled.
+                    A minimum wage is a price floor on labour. Set below what the
+                    market already pays, it does nothing at all. Set above it, and the
+                    quantity of labour employers want falls while the quantity workers
+                    want to supply rises. The textbook calls the gap unemployment.
                   </p>
                   <p>
-                    A family paying three percent who wants to move — for a job, for
-                    space, for a parent who needs care — must give up that loan and
-                    take a new one at close to seven, on a house that costs more than
-                    the one they are leaving. For many the honest answer is that they
-                    cannot afford to move, even though they can afford their current
-                    home comfortably.
+                    The textbook is not the whole story, and a strong presentation
+                    says so. Where a few employers dominate hiring in a town, they can
+                    hold wages below what an extra hour of work is worth to them. In
+                    that case a floor can raise pay <em>and</em> employment at the same
+                    time. This is not a loophole; it is a well-documented finding with
+                    a well-documented ceiling on how far it stretches.
                   </p>
                   <p>
-                    So they stay. And because they stay, the house they would have
-                    sold never reaches the market.
-                  </p>
-                </div>
-
-                <h3 className="mt-12 text-sm font-bold text-text-muted mb-4">
-                  Why this is an economics problem
-                </h3>
-                <div className="space-y-4 text-base text-text-secondary leading-relaxed">
-                  <p>
-                    <strong className="text-arch-white">The old rate is an asset.</strong>{" "}
-                    Keeping it has value; moving forfeits it. That forfeited value
-                    behaves exactly like a tax on moving — except no one collects it
-                    and Congress never voted for it.
+                    Employers who cannot cut wages have other margins. They can raise
+                    prices, cut scheduled hours, tighten staffing, hire more
+                    experienced workers for the same money, or buy a machine. Each of
+                    those moves the cost onto a different group, and only some of them
+                    show up in the unemployment rate.
                   </p>
                   <p>
-                    <strong className="text-arch-white">Higher rates were meant to cool prices.</strong>{" "}
-                    They suppressed demand, as intended. They also suppressed supply,
-                    which was not intended, because the same people who would buy are
-                    the people who would sell. Prices did not fall the way the textbook
-                    diagram suggests.
-                  </p>
-                  <p>
-                    <strong className="text-arch-white">Labour stops moving with it.</strong>{" "}
-                    A worker who will not relocate for a better-matched job is a worker
-                    in a less productive position than the one available. Multiplied
-                    across an economy, that is a real efficiency loss, not just a
-                    housing inconvenience.
-                  </p>
-                  <p>
-                    <strong className="text-arch-white">The cost falls unevenly.</strong>{" "}
-                    Existing owners hold a valuable loan and a rising asset. First-time
-                    buyers face high prices and high rates at once, having had the
-                    chance to lock in neither.
+                    Then there is the question a national number cannot dodge. The same
+                    floor is a modest adjustment in one state and a large shock in
+                    another. What matters is not the dollar figure but the{" "}
+                    <strong className="text-arch-white">bite</strong> — the floor as a
+                    share of the local median wage.
                   </p>
                 </div>
               </div>
 
-              {/* Figures + constraints */}
               <div className="lg:col-span-5 lg:col-start-8">
-                <h3 className="text-sm font-bold text-text-muted mb-4">
-                  Scenario figures
-                </h3>
+                <h3 className="text-sm font-bold text-text-muted mb-4">The situation</h3>
                 <table className="w-full">
                   <tbody className="divide-y divide-border">
-                    {figures.map(([label, value]) => (
+                    {situation.map(([label, value]) => (
                       <tr key={label}>
                         <td className="py-3 pr-4 text-text-muted text-sm align-top">
                           {label}
                         </td>
-                        <td className="py-3 text-arch-white text-sm text-right whitespace-nowrap">
+                        <td className="py-3 text-arch-white text-sm text-right">
                           {value}
                         </td>
                       </tr>
@@ -185,19 +195,18 @@ export default function SampleCasePage() {
                 </table>
                 <p className="mt-4 text-xs text-text-muted leading-relaxed">
                   Figures are approximate and provided for the exercise. If you use a
-                  number in your presentation, cite it from a primary source —
-                  Freddie Mac, the Census Bureau, the Federal Reserve, or the National
-                  Association of Realtors.
+                  number in your presentation, cite it from the Bureau of Labor
+                  Statistics or the Department of Labor directly.
                 </p>
 
                 <div className="mt-10 border border-gold/40 bg-obsidian-light p-6">
                   <h3 className="text-sm font-bold text-gold mb-4">Your constraints</h3>
                   <ul className="space-y-3 text-sm text-text-secondary leading-relaxed">
                     {[
-                      "Federal instruments only. Zoning is set by cities and states — you cannot rezone anything.",
-                      "Ten-year cost under $50 billion, or fund it explicitly.",
-                      "Standing up within eighteen months.",
-                      "One recommendation. Not a list of five things worth doing.",
+                      "Federal policy only. You cannot legislate for a single state.",
+                      "One recommendation, not a list of things worth doing.",
+                      "If it costs money, say where the money comes from.",
+                      "It must survive a change of administration — no policy that only works if everyone agrees with you.",
                     ].map((c) => (
                       <li key={c} className="flex items-start gap-2.5">
                         <span className="w-1 h-1 bg-gold shrink-0 rounded-full mt-2" />
@@ -211,34 +220,60 @@ export default function SampleCasePage() {
           </div>
         </section>
 
-        {/* Approaches */}
+        {/* Dimensions to weigh */}
         <section className="bg-obsidian-light border-y border-border py-16 sm:py-20">
+          <div className="mx-auto max-w-7xl px-6 lg:px-8">
+            <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
+              What your recommendation has to weigh
+            </h2>
+            <p className="max-w-2xl text-sm text-text-secondary leading-relaxed mb-12">
+              A recommendation that only counts the gains is not a recommendation. The
+              panel is looking for all five of these, handled honestly.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8">
+              {dimensions.map((d, i) => (
+                <div key={d.title}>
+                  <span className="text-xs font-bold text-gold tabular-nums">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="mt-2 text-sm font-bold text-arch-white">{d.title}</h3>
+                  <p className="mt-1.5 text-sm text-text-secondary leading-relaxed">
+                    {d.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Options */}
+        <section className="py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
               <div className="lg:col-span-4">
                 <h2 className="text-xs font-semibold tracking-[0.2em] uppercase text-gold mb-4">
-                  Directions you could take
+                  Options on the table
                 </h2>
                 <p className="text-sm text-text-secondary leading-relaxed">
-                  These are starting points, not a menu. There is no answer the judges
-                  are waiting to hear — every one of these has been argued seriously by
-                  economists, and every one has a cost someone has to wear. Taking a
-                  direction not listed here is entirely fair.
+                  Starting points, not a menu. Every one of these has been argued
+                  seriously by economists and every one costs somebody something.
+                  There is no answer the judges are waiting to hear, and a direction
+                  not listed here is entirely fair.
                 </p>
               </div>
               <div className="lg:col-span-7 lg:col-start-6">
                 <div className="border-t border-border">
-                  {approaches.map((a, i) => (
-                    <div key={a.title} className="flex items-start gap-5 border-b border-border py-6">
+                  {options.map((o, i) => (
+                    <div key={o.title} className="flex items-start gap-5 border-b border-border py-6">
                       <span className="text-xs font-bold text-gold mt-1 shrink-0 tabular-nums">
                         {String(i + 1).padStart(2, "0")}
                       </span>
                       <div>
                         <h3 className="font-serif text-lg font-bold text-arch-white">
-                          {a.title}
+                          {o.title}
                         </h3>
                         <p className="mt-1.5 text-sm text-text-secondary leading-relaxed">
-                          {a.text}
+                          {o.text}
                         </p>
                       </div>
                     </div>
@@ -249,8 +284,8 @@ export default function SampleCasePage() {
           </div>
         </section>
 
-        {/* What strong entries do + deliverable */}
-        <section className="py-16 sm:py-20">
+        {/* Strong entries + deliverable */}
+        <section className="border-t border-border py-16 sm:py-20">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
               <div className="lg:col-span-6">

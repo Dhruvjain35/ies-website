@@ -30,14 +30,14 @@ export default function CompetitionsPage() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <span className="text-xs font-bold text-gold tracking-widest uppercase">Compete</span>
             <h1 className="mt-3 font-serif text-4xl sm:text-5xl font-bold text-arch-white leading-tight max-w-3xl">
-              Four events. Every cycle. Open to all chapters.
+              Three events. Every cycle. Open to all chapters.
             </h1>
             <p className="mt-4 text-sm text-text-muted">
               Now running —{" "}
               <span className="text-arch-white font-medium">
                 EPR registration {formatDate(OPENS_AT)} – {formatDate(DEADLINE_AT)}
               </span>
-              , ${PRIZE_POOL} in prizes. GEC, GRP, and Essay Competition dates:{" "}
+              , ${PRIZE_POOL} in prizes. GEC and GRP dates:{" "}
               <span className="text-arch-white font-medium">TBD</span>
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
@@ -45,7 +45,6 @@ export default function CompetitionsPage() {
                 { label: "GEC", sub: "Individual", href: "#gec" },
                 { label: "EPR", sub: "Policy Video", href: "#epr" },
                 { label: "GRP", sub: "Research", href: "#grp" },
-                { label: "ESSAY", sub: "Argument", href: "#essay" },
               ].map((item) => (
                 <a key={item.label} href={item.href} className="flex items-center gap-2 px-4 py-2.5 border border-border hover:border-gold/40 transition-colors">
                   <span className="text-sm font-bold text-arch-white">{item.label}</span>
@@ -169,6 +168,9 @@ export default function CompetitionsPage() {
                       ["Speaking", "Every team member must present"],
                       ["Submission", "Unlisted video link + slide link"],
                       ["Theme", "Announced in advance, same for all entrants"],
+                      ["Registration opens", formatDateTime(OPENS_AT)],
+                      ["Entries close", formatDateTime(DEADLINE_AT)],
+                      ["Judging ends", formatDate(COMPETITION_ENDS_AT)],
                     ].map(([label, value]) => (
                       <tr key={label}>
                         <td className="py-2.5 pr-4 text-text-muted whitespace-nowrap">{label}</td>
@@ -415,187 +417,6 @@ export default function CompetitionsPage() {
           </div>
         </section>
 
-        {/* Essay Competition — stacked bands, distinct from the three above */}
-        <section id="essay" className="scroll-mt-24">
-          <div className="mx-auto max-w-7xl px-6 lg:px-8 py-16 sm:py-20">
-            <div className="flex flex-wrap items-center gap-3 mb-2">
-              <span className="text-xs font-bold text-gold">Individual</span>
-              <span className="text-xs text-text-muted">1,200 Words</span>
-              <span className="text-xs text-text-muted">Single Prompt</span>
-              <span className="px-2 py-0.5 text-xs font-bold text-obsidian bg-gold">New</span>
-            </div>
-            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-arch-white mb-4">
-              IES Essay Competition (IEC)
-            </h2>
-            <p className="text-base text-text-secondary leading-relaxed max-w-3xl mb-12">
-              The IEC is IES&apos;s argument event. Every participant answers the same
-              prompt on a contested economic question, takes a position, and defends
-              it in 1,200 words. Where the GRP rewards depth of research, the IEC
-              rewards the quality of the reasoning itself. Essays are anonymized
-              before they reach the judging panel.
-            </p>
-
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-              {/* Format */}
-              <div className="lg:col-span-4">
-                <h3 className="text-sm font-bold text-text-muted mb-4">Format</h3>
-                <table className="w-full">
-                  <tbody className="divide-y divide-border">
-                    {[
-                      ["Participants", "Individual entry"],
-                      ["Word count", "1,200 words max"],
-                      ["Prompt", "One prompt, same for all"],
-                      ["Sources", "Optional, cited if used"],
-                      ["Registration opens", formatDateTime(OPENS_AT)],
-                      ["Entries close", formatDateTime(DEADLINE_AT)],
-                      ["Competition ends", formatDate(COMPETITION_ENDS_AT)],
-                      ["Entries", "One per participant"],
-                      ["Judging", "Anonymized, panel-scored"],
-                    ].map(([label, value]) => (
-                      <tr key={label}>
-                        <td className="py-2.5 pr-4 text-text-muted whitespace-nowrap text-sm">{label}</td>
-                        <td className="py-2.5 text-arch-white text-sm">{value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-
-              {/* Submission requirements */}
-              <div className="lg:col-span-4">
-                <h3 className="text-sm font-bold text-text-muted mb-4">Submission Requirements</h3>
-                <div className="space-y-3">
-                  {[
-                    "PDF or DOCX, submitted by the deadline in the prompt email",
-                    "12pt body text, double-spaced, numbered pages",
-                    "Word count excludes the title, citations, and bibliography",
-                    "No name anywhere in the document — use the entry ID we email you",
-                    "MLA, APA, or Chicago, applied consistently throughout",
-                    "Entirely original work, free of AI-generated content",
-                  ].map((item, i) => (
-                    <div key={item} className="flex items-start gap-3">
-                      <span className="text-xs font-bold text-gold mt-0.5 shrink-0">{String(i + 1).padStart(2, '0')}</span>
-                      <span className="text-sm text-text-secondary leading-relaxed">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Awards */}
-              <div className="lg:col-span-4">
-                <h3 className="text-sm font-bold text-text-muted mb-4">Awards</h3>
-                <table className="w-full">
-                  <tbody className="divide-y divide-border">
-                    {[
-                      ["1st Place", "Gold Trophy + Certificate"],
-                      ["2nd Place", "Silver Trophy + Certificate"],
-                      ["3rd Place", "Bronze Trophy + Certificate"],
-                      ["4th–10th", "Medal + Certificate"],
-                    ].map(([place, award]) => (
-                      <tr key={place}>
-                        <td className="py-2.5 pr-4 text-text-muted whitespace-nowrap text-sm">{place}</td>
-                        <td className="py-2.5 text-arch-white text-sm">{award}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-                <div className="mt-4 space-y-1 text-text-secondary text-sm">
-                  <p><strong className="text-arch-white">Best Counterargument:</strong> strongest engagement with the opposing case</p>
-                  <p><strong className="text-arch-white">Published in the IES Journal:</strong> top 3 essays are featured</p>
-                  <p><strong className="text-arch-white">Chapter Champion:</strong> highest scorer from each chapter</p>
-                </div>
-              </div>
-            </div>
-
-            {/* Scoring rubric — weighted, on a contrasting panel */}
-            <div className="mt-14 bg-obsidian-light border border-border p-8 sm:p-10">
-              <div className="flex flex-wrap items-baseline justify-between gap-4 mb-8">
-                <h3 className="text-sm font-bold text-gold tracking-[0.2em] uppercase">
-                  Scoring Rubric
-                </h3>
-                <span className="text-sm text-text-muted">100 points total</span>
-              </div>
-              <div className="space-y-5">
-                {[
-                  ["Economic reasoning", 25, "Is the analysis correct, and does it use economic logic rather than assertion?"],
-                  ["Thesis and position", 20, "Is there one clear claim, stated early and held throughout?"],
-                  ["Counterargument", 20, "Is the strongest opposing case represented fairly and answered?"],
-                  ["Evidence", 15, "Is the evidence accurate, relevant, and honestly characterized?"],
-                  ["Structure and prose", 15, "Does the essay read clearly and move in a deliberate order?"],
-                  ["Originality", 5, "Does the argument show independent thought?"],
-                ].map(([criterion, weight, detail]) => (
-                  <div key={criterion as string}>
-                    <div className="flex items-baseline justify-between gap-4 mb-2">
-                      <span className="text-sm font-semibold text-arch-white">{criterion}</span>
-                      <span className="text-sm font-bold text-gold shrink-0">{weight} pts</span>
-                    </div>
-                    <div className="h-1 w-full bg-obsidian mb-2">
-                      <div className="h-full bg-gold/60" style={{ width: `${weight}%` }} />
-                    </div>
-                    <p className="text-sm text-text-secondary leading-relaxed">{detail}</p>
-                  </div>
-                ))}
-              </div>
-              <p className="mt-8 pt-6 border-t border-border text-sm text-text-secondary">
-                Each essay is scored independently by two judges. Scores within 10 points
-                are averaged; a wider gap goes to a third judge, whose score is final.
-                Essays over the word limit are scored on the first 1,200 words only.
-              </p>
-            </div>
-
-            <div className="mt-8 text-text-secondary">
-              <strong className="text-text-muted">Eligibility:</strong> Open to any high school student. Unlike the GEC, EPR, and GRP, chapter membership is <span className="text-arch-white">not required</span> to enter — though chapter members remain eligible for the Chapter Champion award. All work must be original and free of AI-generated content.
-            </div>
-
-            {/* Sample prompts — illustrative, the live prompt is not published */}
-            <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
-              <div className="lg:col-span-4">
-                <h3 className="text-sm font-bold text-gold tracking-[0.2em] uppercase mb-4">
-                  Sample Prompts
-                </h3>
-                <p className="text-sm text-text-secondary leading-relaxed">
-                  The live prompt is not published in advance. These are the shape of
-                  question to expect: contested, answerable from either side, and
-                  impossible to resolve by looking something up.
-                </p>
-              </div>
-              <div className="lg:col-span-7 lg:col-start-6">
-                <div className="border-t border-border">
-                  {[
-                    "Central banks have targeted 2% inflation for three decades. Should that target be higher?",
-                    "Does industrial policy do more good than harm in developing economies?",
-                    "A country discovers a large resource windfall. Is a sovereign wealth fund the responsible use of it?",
-                  ].map((prompt, i) => (
-                    <div key={prompt} className="flex items-start gap-5 border-b border-border py-6">
-                      <span className="text-xs font-bold text-gold mt-1 shrink-0">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <p className="font-serif text-lg text-arch-white leading-snug">{prompt}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-
-            {/* Not the active cycle — EPR is the event currently open */}
-            <div className="mt-10 border border-border bg-obsidian-light p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
-              <div>
-                <p className="text-sm font-bold text-arch-white">Not the current cycle</p>
-                <p className="mt-1.5 text-sm text-text-secondary max-w-xl">
-                  The Essay Competition is not the event currently accepting entries.
-                  The EPR is open this cycle — dates and registration are above.
-                </p>
-              </div>
-              <Link
-                href="/competitions#epr"
-                className="shrink-0 px-6 py-3 text-sm font-bold text-obsidian bg-gold hover:bg-gold-dark transition-colors"
-              >
-                Go to the EPR
-              </Link>
-            </div>
-          </div>
-        </section>
-
         {/* CTA */}
         <section className="py-16">
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -612,7 +433,7 @@ export default function CompetitionsPage() {
                   href="/register"
                   className="px-6 py-3 text-sm text-text-secondary border border-border hover:text-arch-white hover:border-text-muted transition-colors"
                 >
-                  Essay Competition
+                  Register for the EPR
                 </Link>
                 <Link
                   href="/journal"

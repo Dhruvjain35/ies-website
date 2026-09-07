@@ -158,7 +158,7 @@ export default function JournalPage() {
                 {
                   step: "01",
                   title: "Competition or submission",
-                  description: "Work arrives either from an IES competition — the GRP, EPR, or Essay Competition — or is submitted directly by a student author.",
+                  description: "Work arrives either from an IES competition — the GRP or the EPR — or is submitted directly by a student author.",
                 },
                 {
                   step: "02",
@@ -294,7 +294,7 @@ export default function JournalPage() {
                     Through a competition
                   </h3>
                   <p className="mt-1.5 text-sm text-text-secondary leading-relaxed">
-                    Work entered into the GRP, EPR, or Essay Competition is considered
+                    Work entered into the GRP or the EPR is considered
                     for the Journal automatically once judging closes. Nothing extra to
                     submit — entering is enough.
                   </p>
