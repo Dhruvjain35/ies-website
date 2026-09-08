@@ -6,13 +6,17 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "check:windows": "node scripts/check-windows.mjs",
+    "prebuild": "node scripts/check-windows.mjs",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "next": "16.2.2",
     "react": "19.2.4",
     "react-dom": "19.2.4",
-    "react-simple-maps": "^3.0.0"
+    "react-simple-maps": "^3.0.0",
+    "spacetimedb": "^2.4.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",

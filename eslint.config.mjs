@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Written by `spacetime generate`. Editing it by hand is pointless because
+    // the next regeneration overwrites the file.
+    "src/module_bindings/**",
   ]),
 ]);
 

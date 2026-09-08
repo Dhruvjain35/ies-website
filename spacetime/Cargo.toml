@@ -1,0 +1,18 @@
+[package]
+name = "ies-members"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+# Pinned to the CLI's own version. The caret range resolves to 2.10.0, whose
+# bindings differ, and a module built against a different ABI than the CLI that
+# publishes it is a class of bug that shows up only at runtime.
+spacetimedb = { version = "=2.4.1", features = ["unstable"] }
+log = "0.4"
+
+[profile.release]
+opt-level = "z"
+lto = true

@@ -114,3 +114,81 @@ told to email `ies.economicsociety@gmail.com` directly.
 Failures are logged to the Vercel function logs with the `[epr-signup]`
 prefix. The usual cause is step 3 — the sheet not shared with the service
 account.
+
+---
+
+# Member accounts and the other two competitions
+
+The EPR form above is the standalone path: no account, straight into the
+spreadsheet. Alongside it there is now a membership system covering all three
+competitions, backed by SpacetimeDB rather than Sheets.
+
+| Address | What it is |
+| --- | --- |
+| `/members` | Join, and then every competition in one place |
+| `/competitions/gec/register` | The GEC on its own page, shareable |
+| `/competitions/epr/register` | The EPR through a membership |
+| `/competitions/grp/register` | The GRP on its own page, shareable |
+| `/register` | The original standalone EPR form, unchanged |
+
+## The three cycles
+
+Dates live in `src/lib/competition.ts` and are mirrored as integers in
+`spacetime/src/lib.rs`, which is what actually refuses a late entry.
+`npm run check:windows` compares them and runs automatically before every build,
+so the two cannot drift apart unnoticed. **Changing a date means editing both and
+republishing the module**, otherwise the site and the server will disagree.
+
+| | Registration opens | Entries close | Then |
+| --- | --- | --- | --- |
+| GEC | 1 Sep 2026, 9:00 AM CT | 21 Nov 2026, 11:59 PM CT | Exam day 6 Dec 2026 |
+| EPR | 12 Sep 2026, 9:00 AM CT | 3 Oct 2026, 11:59 PM CT | Judging ends 17 Oct 2026 |
+| GRP | 5 Oct 2026, 9:00 AM CT | 16 Jan 2027, 11:59 PM CT | Papers due 27 Feb 2027 |
+
+The GEC and GRP dates were chosen to sit either side of the EPR rather than on
+top of it. They are placeholders in the sense that nobody has committed to them
+publicly yet, and real in the sense that the site and the server both enforce
+them today. The GRP featured country is Vietnam, set by `GRP_FEATURED_COUNTRY`.
+
+Note that GEC and GRP cross the end of US daylight saving on 1 November 2026, so
+their opening instants are written `-05:00` and their closing instants `-06:00`.
+
+## What an account is
+
+A membership is a SpacetimeDB identity, and the token proving it lives in the
+member's browser. That is why joining is seven questions with no password and no
+confirmation email, and it is also why a second device cannot simply be logged
+into: the member generates an eight character code under "Sign in on another
+device", and types it into the other one within fifteen minutes. The code works
+once.
+
+Deleting a membership from the dashboard withdraws every entry with it, and
+cannot be undone.
+
+## Privacy
+
+Members and entries are **private** tables. A SpacetimeDB table marked `public`
+can be read by any client that subscribes to it, and row-level security is not
+yet enforced by the host, so a filter would have been decoration over a leak of
+every member's email address. The only way to read an account is the
+`my_account` procedure, which returns rows belonging to the caller and takes no
+argument for whose account to fetch. Only `tally` (headcounts) and `window` (the
+schedule) are public, and neither carries a name.
+
+## Deploying the module
+
+```bash
+cd spacetime
+spacetime login
+spacetime publish --server maincloud <module-name>     # first time
+cd .. && spacetime generate --lang typescript --out-dir src/module_bindings --module-path spacetime
+```
+
+Put the module name in `NEXT_PUBLIC_STDB_MODULE`, in `.env.local` locally and in
+the host's environment variables for production. Without it the member area
+renders a plain notice saying it is not switched on, and the rest of the site is
+unaffected.
+
+Republish after any change to `spacetime/src/`, and regenerate the bindings
+whenever a table, reducer or procedure changes shape. `--delete-data` on publish
+wipes every membership, so keep it for setup only.

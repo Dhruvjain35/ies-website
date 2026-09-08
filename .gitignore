@@ -46,3 +46,9 @@ next-env.d.ts
 
 # Original video source (use ies-intro.mp4 instead)
 public/IES_VID.mov
+
+# SpacetimeDB module name. Semi-secret: anyone with it can reach the database.
+.stdb-name
+
+# Rust build artefacts for the SpacetimeDB module
+spacetime/target/

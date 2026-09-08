@@ -11,6 +11,7 @@ const navLinks = [
   { label: "Journal", href: "/journal" },
   { label: "Chapters", href: "/impact" },
   { label: "Join", href: "/join" },
+  { label: "Members", href: "/members" },
   { label: "Contact", href: "/contact" },
 ];
 
