@@ -1,16 +1,7 @@
-"use client";
-
-import { useRef, useState, FormEvent } from "react";
 import Link from "next/link";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import SectionArt from "@/components/SectionArt";
-import {
-  submitToWeb3Forms,
-  inputClass,
-  labelClass,
-  type FormStatus,
-} from "@/lib/web3forms";
 
 /** IES Discord server invite. Update here if the invite is ever regenerated. */
 const DISCORD_INVITE = "https://discord.gg/vjfGycbtw";
@@ -50,34 +41,6 @@ const steps = [
 ];
 
 export default function JoinPage() {
-  const [status, setStatus] = useState<FormStatus>("idle");
-  const formRef = useRef<HTMLFormElement>(null);
-
-  async function handleSubmit(e: FormEvent) {
-    e.preventDefault();
-    const form = formRef.current;
-    if (!form) return;
-    setStatus("submitting");
-    const data = new FormData(form);
-    const success = await submitToWeb3Forms({
-      subject: "IES Membership Signup",
-      from_name: data.get("name") as string,
-      "Name": data.get("name") as string,
-      "Email": data.get("email") as string,
-      "School / Institution": data.get("institution") as string,
-      "Grade / Year": data.get("year") as string,
-      "Country": data.get("country") as string,
-      "Discord Username": (data.get("discord") as string) || "Not provided",
-      "Interests": (data.get("interests") as string) || "Not provided",
-    });
-    if (success) {
-      setStatus("success");
-      form.reset();
-    } else {
-      setStatus("error");
-    }
-  }
-
   return (
     <>
       <Navigation />
@@ -182,66 +145,24 @@ export default function JoinPage() {
                   </h2>
                 </div>
 
-                <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
-                  <div>
-                    <label htmlFor="jn-name" className={labelClass}>Full Name</label>
-                    <input id="jn-name" name="name" type="text" required className={inputClass} placeholder="Enter your full name" />
-                  </div>
-                  <div>
-                    <label htmlFor="jn-email" className={labelClass}>Email</label>
-                    <input id="jn-email" name="email" type="email" required className={inputClass} placeholder="name@school.edu" />
-                  </div>
-                  <div>
-                    <label htmlFor="jn-institution" className={labelClass}>School / Institution</label>
-                    <input id="jn-institution" name="institution" type="text" required className={inputClass} placeholder="Your school or institution" />
-                  </div>
-                  <div>
-                    <label htmlFor="jn-year" className={labelClass}>Grade / Year</label>
-                    <input id="jn-year" name="year" type="text" required className={inputClass} placeholder="e.g. Grade 11, Year 12" />
-                  </div>
-                  <div>
-                    <label htmlFor="jn-country" className={labelClass}>Country</label>
-                    <input id="jn-country" name="country" type="text" required className={inputClass} placeholder="Your country" />
-                  </div>
-                  <div>
-                    <label htmlFor="jn-discord" className={labelClass}>
-                      Discord Username <span className="text-text-muted normal-case">(optional)</span>
-                    </label>
-                    <input id="jn-discord" name="discord" type="text" className={inputClass} placeholder="So we can match you to the server" />
-                  </div>
-                  <div>
-                    <label htmlFor="jn-interests" className={labelClass}>
-                      What are you most interested in? <span className="text-text-muted normal-case">(optional)</span>
-                    </label>
-                    <textarea id="jn-interests" name="interests" rows={3} className={`${inputClass} resize-none`} placeholder="Competitions, research, starting a chapter, the journal..." />
-                  </div>
+                <p className="text-base text-text-secondary leading-relaxed">
+                  Membership lives in your IES account. Seven short questions,
+                  no password, and it is what every competition entry is
+                  recorded against.
+                </p>
 
-                  <button
-                    type="submit"
-                    disabled={status === "submitting"}
-                    className="w-full px-8 py-4 text-sm font-semibold text-obsidian bg-gold hover:bg-gold-dark transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {status === "submitting" ? "Submitting..." : "Register as an IES Member"}
-                  </button>
-                </form>
+                <Link
+                  href="/members"
+                  className="mt-8 inline-block px-8 py-4 text-sm font-bold text-obsidian bg-gold hover:bg-gold-dark transition-colors"
+                >
+                  Register as an IES Member
+                </Link>
 
-                {status === "success" && (
-                  <p className="mt-4 text-sm text-green-400">
-                    You are on the list. Watch your inbox for the next competition
-                    cycle, and join the Discord above if you have not already.
-                  </p>
-                )}
-                {status === "error" && (
-                  <p className="mt-4 text-sm text-red-400">
-                    Something went wrong. Please try again or email us directly at ies.economicsociety@gmail.com.
-                  </p>
-                )}
-                {status === "idle" && (
-                  <p className="mt-4 text-xs text-text-muted">
-                    Membership is free. We only email about competitions, the
-                    journal, and chapter news.
-                  </p>
-                )}
+                <p className="mt-4 text-xs text-text-muted">
+                  Free. We only email about competitions, the journal, and
+                  chapter news. Already a member on another device? There is a
+                  sign-in code on the same page.
+                </p>
               </div>
 
               {/* How it works */}

@@ -14,7 +14,14 @@ import {
   VIDEO_MAX_MINUTES,
   formatDate,
   formatDateTime,
+  GRP_FEATURED_COUNTRY,
+  getCompetition,
 } from "@/lib/competition";
+
+// The catalogue is the only place these dates exist on the site side, so the
+// page reads them from it rather than restating them.
+const GEC = getCompetition("gec")!;
+const GRP = getCompetition("grp")!;
 
 export const metadata = {
   title: "Competitions | International Economic Society",
@@ -37,8 +44,10 @@ export default function CompetitionsPage() {
               <span className="text-arch-white font-medium">
                 EPR registration {formatDate(OPENS_AT)} – {formatDate(DEADLINE_AT)}
               </span>
-              , ${PRIZE_POOL} in prizes. GEC and GRP dates:{" "}
-              <span className="text-arch-white font-medium">TBD</span>
+              , ${PRIZE_POOL} in prizes. GEC entries close{" "}
+              <span className="text-arch-white font-medium">{formatDate(GEC.closesAt)}</span>
+              , GRP opens{" "}
+              <span className="text-arch-white font-medium">{formatDate(GRP.opensAt)}</span>
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               {[
@@ -127,6 +136,21 @@ export default function CompetitionsPage() {
 
             <div className="mt-8 text-text-secondary">
               <strong className="text-text-muted">Eligibility:</strong> Active IES chapter members currently enrolled in high school. No prior economics coursework required.
+            </div>
+
+            <div className="mt-10 border border-border p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+              <div>
+                <p className="text-sm font-bold text-arch-white">Registration is open</p>
+                <p className="mt-1.5 text-sm text-text-secondary">
+                  Entries close {formatDate(GEC.closesAt)}. Sitting the exam needs a proctor, so bring a teacher or a chapter advisor.
+                </p>
+              </div>
+              <Link
+                href="/competitions/gec/register"
+                className="shrink-0 px-6 py-3 text-sm font-bold text-obsidian bg-gold hover:bg-gold-dark transition-colors"
+              >
+                Register for the GEC
+              </Link>
             </div>
           </div>
         </section>
@@ -414,6 +438,23 @@ export default function CompetitionsPage() {
             <div className="mt-8 text-text-secondary">
               <strong className="text-text-muted">Eligibility:</strong> Active IES chapter members currently enrolled in high school. Individual or team of 2 from the same chapter. All work must be original and free of AI-generated content.
             </div>
+
+            <div className="mt-10 border border-border p-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
+              <div>
+                <p className="text-sm font-bold text-arch-white">
+                  This cycle is written about {GRP_FEATURED_COUNTRY}
+                </p>
+                <p className="mt-1.5 text-sm text-text-secondary">
+                  Registration opens {formatDate(GRP.opensAt)} and papers are due {formatDate(GRP.endsAt)}. Register early and change your topic as often as you like.
+                </p>
+              </div>
+              <Link
+                href="/competitions/grp/register"
+                className="shrink-0 px-6 py-3 text-sm text-arch-white border border-gold/50 hover:bg-gold hover:text-obsidian transition-colors"
+              >
+                Register for the GRP
+              </Link>
+            </div>
           </div>
         </section>
 
@@ -434,6 +475,12 @@ export default function CompetitionsPage() {
                   className="px-6 py-3 text-sm text-text-secondary border border-border hover:text-arch-white hover:border-text-muted transition-colors"
                 >
                   Register for the EPR
+                </Link>
+                <Link
+                  href="/members"
+                  className="px-6 py-3 text-sm text-text-secondary border border-border hover:text-arch-white hover:border-text-muted transition-colors"
+                >
+                  Your entries
                 </Link>
                 <Link
                   href="/journal"
